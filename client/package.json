@@ -1,20 +1,21 @@
 {
-  "name": "react-ts-template",
+  "name": "spa-app",
   "version": "1.0.0",
   "description": "",
+  "homepage": "https://Anton-Liada.github.io/spa-app/",
   "source": "public/index.html",
   "scripts": {
-    "predeploy": "rm -rf build & npm run build",
-    "deploy": "gh-pages -d public",
-    "dev": "parcel -p 7000 --open",
-    "build": "parcel build",
-    "typecheck": "npx tsc",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
+    "dev": "parcel -p 7001 --open",
+    "build": "parcel build public/index.html --public-url /spa-app/",
     "checkformat": "prettier --check \"**/*.{js,jsx,ts,tsx,json}\"",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json}\"",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "prepare": "husky install"
   },
   "devDependencies": {
+    "@parcel/transformer-sass": "^2.8.0",
     "@types/node": "^18.11.15",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.6",
@@ -45,9 +46,11 @@
     "@reduxjs/toolkit": "^1.9.1",
     "@types/react-redux": "^7.1.24",
     "axios": "^1.2.5",
+    "node-sass": "^8.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-redux": "^8.0.5"
+    "react-redux": "^8.0.5",
+    "typescript-plugin-css-modules": "^4.1.1"
   },
   "browserslist": {
     "production": [
