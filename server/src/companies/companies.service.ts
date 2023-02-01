@@ -15,21 +15,21 @@ export class CompaniesService {
     return await this.companyRepository.findAll({ include: { all: true } });
   }
 
-  // async getCompanyByTitle(name: string) {
-  //   const company = await this.companyRepository.findOne({
-  //     where: { name },
-  //   });
+  async getCompanyByTitle(name: string) {
+    const company = await this.companyRepository.findOne({
+      where: { name },
+    });
 
-  //   return company;
-  // }
+    return company;
+  }
 
-  // async createCompany(dto: CreateCompanyDto) {
-  //   const company = await this.getCompanyByTitle(dto.name);
+  async createCompany(dto: CreateCompanyDto) {
+    const company = await this.getCompanyByTitle(dto.name);
 
-  //   if (company) {
-  //     throw new ConflictException(`${dto.name} уже существует`);
-  //   }
+    if (company) {
+      throw new ConflictException(`${dto.name} уже существует`);
+    }
 
-  //   return await this.companyRepository.create(dto);
-  // }
+    return await this.companyRepository.create(dto);
+  }
 }

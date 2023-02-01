@@ -1,13 +1,13 @@
 @import '../../styles/main.scss';
 
-.loginSection {
+.registerSection {
   display: flex;
   justify-content: space-around;
   padding: 25px 0;
-  height: 100vh;
+  min-height: 100vh;
 }
 
-.loginBlock {
+.registerBlock {
   display: flex;
   flex-direction: column;
   width: 430px;

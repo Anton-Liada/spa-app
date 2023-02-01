@@ -1,4 +1,5 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { LocalAuthGuard } from 'src/auth/guards/local-auth.guard';
 import { CompaniesService } from './companies.service';
 import { CreateCompanyDto } from './dto/create-company.dto';
 
@@ -6,8 +7,14 @@ import { CreateCompanyDto } from './dto/create-company.dto';
 export class CompaniesController {
   constructor(private companiesService: CompaniesService) {}
 
-  // @Post()
-  // createCompany(@Body() dto: CreateCompanyDto) {
-  //   return this.companiesService.createCompany(dto);
-  // }
+  // @UseGuards(LocalAuthGuard)
+  @Get()
+  getAll() {
+    return this.companiesService.getAllCompanies();
+  }
+
+  @Post()
+  createCompany(@Body() dto: CreateCompanyDto) {
+    return this.companiesService.createCompany(dto);
+  }
 }

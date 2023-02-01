@@ -1,18 +1,35 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link, Navigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import styles from './loginPage.module.scss';
+import { useAppDispatch, useAppSelector } from '../../features/hooks/hooks';
+import { fetchAuth, selectIsAuth } from '../../features/slices/authSlice';
+import { ILogin } from '../../types/types';
 
 export const LoginPage: React.FC = () => {
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const dispatch = useAppDispatch();
+  const isAuth = useAppSelector(selectIsAuth);
 
-  const handleChageEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value);
-  };
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors, isValid },
+  } = useForm({
+    defaultValues: {
+      email: '',
+      password: '',
+    }
+  });
 
-  const handleChagePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
+  const onSubmit = (data: ILogin) => {
+    dispatch(fetchAuth(data));
   };
+  console.log(isAuth)
+
+  if (isAuth) {
+    return <Navigate to='/' />;
+  }
 
   return (
     <section className={styles.loginSection}>
@@ -32,15 +49,14 @@ export const LoginPage: React.FC = () => {
           </Link>
         </p>
 
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <div className={styles.inputWrapper}>
             <label className={styles.label}>Email</label>
 
             <input
               className={styles.input}
               type="text"
-              onChange={handleChageEmail}
-              value={email}
+              {...register('email', { required: 'enter data' })}
               placeholder='Enter your email address'
             />
 
@@ -49,8 +65,7 @@ export const LoginPage: React.FC = () => {
             <input
               className={styles.input}
               type="password"
-              onChange={handleChagePassword}
-              value={password}
+              {...register('password', { required: 'enter data' })}
               placeholder='Enter your Password'
             />
           </div>
@@ -58,10 +73,6 @@ export const LoginPage: React.FC = () => {
           <button type='submit' className={styles.button}>Login</button>
         </form >
       </div >
-
-      <div className={styles.imageWrapper}>
-        <div className={styles.image}></div>
-      </div>
     </section>
   )
 }

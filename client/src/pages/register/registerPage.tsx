@@ -15,8 +15,8 @@ export const RegisterPage: React.FC = () => {
   };
 
   return (
-    <section className={styles.loginSection}>
-      <div className={styles.loginBlock}>
+    <section className={styles.registerSection}>
+      <div className={styles.registerBlock}>
         <h2 className={styles.title}>
           Sign up
         </h2>
@@ -54,16 +54,6 @@ export const RegisterPage: React.FC = () => {
               placeholder='Enter your Last name'
             />
 
-            <label className={styles.label}>Email</label>
-
-            <input
-              className={styles.input}
-              type="email"
-              onChange={handleChageEmail}
-              value={email}
-              placeholder='Enter your email address'
-            />
-
             <label className={styles.label}>Username</label>
 
             <input
@@ -82,6 +72,16 @@ export const RegisterPage: React.FC = () => {
               // onChange={handleChageEmail}
               // value={email}
               placeholder='Enter your Phone'
+            />
+
+            <label className={styles.label}>Email</label>
+
+            <input
+              className={styles.input}
+              type="email"
+              onChange={handleChageEmail}
+              value={email}
+              placeholder='Enter your email address'
             />
 
             <label className={styles.label}>Password</label>

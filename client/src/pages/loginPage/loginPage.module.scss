@@ -2,8 +2,7 @@
 
 .loginSection {
   display: flex;
-  justify-content: space-around;
-  padding: 25px 0;
+  justify-content: center;
   height: 100vh;
 }
 
@@ -73,19 +72,4 @@
   color: $color-grey;
   text-align: center;
   margin-bottom: 40px;
-}
-
-.imageWrapper {
-  display: flex;
-  align-items: center;
-  background-color: $color-transparent;
-  border-radius: 15px;
-}
-
-.image {
-  height: 410px;
-  width: 550px;
-  background-image: linear-gradient(to right, $color-transparent, $color-transparent), url(../../styles/images/login.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
 }
