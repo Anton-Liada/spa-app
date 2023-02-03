@@ -9,9 +9,12 @@ import {
 import { User } from 'src/users/users.model';
 
 interface CompanyCreationAttrs {
-  title: string;
-  description: string;
+  id: number;
   userId: number;
+  name: string;
+  address: string;
+  serviceOfActivity: string;
+  numberOfEmployees: number;
 }
 
 @Table({ tableName: 'companies' })

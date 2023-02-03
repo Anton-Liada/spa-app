@@ -1,14 +1,14 @@
 import { Status } from "./enums";
 
 export interface IUser {
-  id: number;
+  id?: number;
   email: string;
-  phone_number: number;
+  phone_number: number | null;
   last_name: string;
   first_name: string;
   nick_name: string;
-  roles: string[];
-  companies: ICompany[];
+  roles?: string[];
+  companies?: ICompany[];
 }
 
 export interface ICompany {
@@ -17,12 +17,13 @@ export interface ICompany {
   address: string;
   serviceOfActivity: string;
   userId: number;
-  numberOfEmployees: number;
+  numberOfEmployees: number | null;
   author: IUser;
 }
 
 export interface ICompaniesState {
   companies: ICompany[];
+  selectedCompany: ICompany | null;
   status: Status;
   error: null | string;
 }

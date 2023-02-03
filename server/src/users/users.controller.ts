@@ -13,6 +13,8 @@ import { AddRoleDto } from '../users/dto/add-role.dto';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UsersService } from './users.service';
 
+@Roles('ADMIN')
+@UseGuards(RolesAuthGuard)
 @Controller('users')
 export class UsersController {
   constructor(private userService: UsersService) {}
@@ -22,15 +24,11 @@ export class UsersController {
     return this.userService.createUser(userDto);
   }
 
-  // @Roles('ADMIN')
-  // @UseGuards(JwtAuthGuard)
   @Get()
   getAll() {
     return this.userService.getAllUsers();
   }
 
-  @Roles('ADMIN')
-  @UseGuards(RolesAuthGuard)
   @Post('/role')
   addRole(@Body() dto: AddRoleDto) {
     return this.userService.addRole(dto);

@@ -1,0 +1,17 @@
+@import '../../styles/main.scss';
+
+.login {
+
+  &-section {
+    display: flex;
+    justify-content: center;
+    height: calc(100vh - 50px);
+  }
+
+  &-block {
+    display: flex;
+    flex-direction: column;
+    width: 430px;
+    justify-content: center;
+  }
+}

@@ -3,8 +3,20 @@ import { Status } from "/src/types/enums";
 import axios from '../../axios';
 import { ILogin, IUser, IUserState } from "/src/types/types";
 
-export const fetchAuth = createAsyncThunk('auth/fetchAuth', async (params: ILogin) => {
+export const fetchLogin = createAsyncThunk('auth/fetchLogin', async (params: ILogin) => {
   const { data } = await axios.post('auth/signin', params)
+
+  return data;
+})
+
+export const fetchRegister = createAsyncThunk('auth/fetchRegister', async (params: IUser) => {
+  const { data } = await axios.post('auth/signup', params);
+
+  return data;
+})
+
+export const fetchAuth = createAsyncThunk('auth/fetchAuth', async () => {
+  const { data } = await axios.get('auth/me');
 
   return data;
 })
@@ -25,6 +37,21 @@ const authSlice = createSlice({
   },
   extraReducers(builder) {
     builder
+      .addCase(fetchLogin.pending, (state) => {
+        state.status = Status.LOADING;
+      })
+      .addCase(
+        fetchLogin.fulfilled,
+        (state, action: PayloadAction<IUser>) => {
+          state.status = Status.SUCCEEDED;
+          state.user = action.payload;
+        })
+      .addCase(fetchLogin.rejected, (state) => {
+        state.status = Status.FAILED;
+        state.error = 'error';
+      });
+
+      builder
       .addCase(fetchAuth.pending, (state) => {
         state.status = Status.LOADING;
       })
@@ -38,10 +65,25 @@ const authSlice = createSlice({
         state.status = Status.FAILED;
         state.error = 'error';
       });
+
+      builder
+      .addCase(fetchRegister.pending, (state) => {
+        state.status = Status.LOADING;
+      })
+      .addCase(
+        fetchRegister.fulfilled,
+        (state, action: PayloadAction<IUser>) => {
+          state.status = Status.SUCCEEDED;
+          state.user = action.payload;
+        })
+      .addCase(fetchRegister.rejected, (state) => {
+        state.status = Status.FAILED;
+        state.error = 'error';
+      });
   }
 });
 
-export const selectIsAuth = (state: { auth: { user: IUser | null } }) => (
+export const selectIsLogin = (state: { auth: { user: IUser | null } }) => (
   Boolean(state.auth.user)
 );
 

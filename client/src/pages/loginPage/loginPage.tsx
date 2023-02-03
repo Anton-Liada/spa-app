@@ -1,76 +1,81 @@
 import React from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import styles from './loginPage.module.scss';
-import { useAppDispatch, useAppSelector } from '../../features/hooks/hooks';
-import { fetchAuth, selectIsAuth } from '../../features/slices/authSlice';
+import { useAppDispatch } from '../../features/hooks/hooks';
+import { fetchLogin } from '../../features/slices/authSlice';
 import { ILogin } from '../../types/types';
+import { AuthComponent } from '../../componets/authComponent';
+import './loginPage.scss';
 
 export const LoginPage: React.FC = () => {
   const dispatch = useAppDispatch();
-  const isAuth = useAppSelector(selectIsAuth);
+  const nav = useNavigate();
 
   const {
     register,
     handleSubmit,
     setError,
     formState: { errors, isValid },
-  } = useForm({
+  } = useForm<ILogin>({
     defaultValues: {
-      email: '',
-      password: '',
+      email: 'ADMIN3',
+      password: 'ADMIN3',
     }
   });
 
-  const onSubmit = (data: ILogin) => {
-    dispatch(fetchAuth(data));
-  };
-  console.log(isAuth)
+  const onSubmit = async (values: ILogin) => {
+    try {
+      const data = await dispatch(fetchLogin(values));
+      if (!data.payload) {
+        throw new Error('Failed to login');
+      }
 
-  if (isAuth) {
-    return <Navigate to='/' />;
-  }
+      if ('access_token' in data.payload) {
+        window.localStorage.setItem('access_token', data.payload.access_token);
+      }
+
+      nav('/');
+    } catch (error) {
+      throw new Error('something went wrong')
+    }
+  };
 
   return (
-    <section className={styles.loginSection}>
-      <div className={styles.loginBlock}>
-        <h2 className={styles.title}>
-          Sign in
-        </h2>
+    <section className="login-section">
+      <div className="login-block">
+        <AuthComponent to='register' content='Register here !' title='Sign in' />
 
-        <p className={styles.description}>
-          If you don’t have an account register <br />
-          You can
-          <Link
-            to={'/register'}
-            className={styles.link}
-          >
-            Register here !
-          </Link>
-        </p>
-
-        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-          <div className={styles.inputWrapper}>
-            <label className={styles.label}>Email</label>
+        <form
+          className="primary-form"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <div className="primary-form__input-wrapper">
+            <label className="primary-form__label">
+              Email
+            </label>
 
             <input
-              className={styles.input}
+              className="primary-form__input"
               type="text"
-              {...register('email', { required: 'enter data' })}
-              placeholder='Enter your email address'
+              {...register('email', { required: 'enter Email' })}
+              placeholder='Enter your Email address'
             />
 
-            <label className={styles.label}>Password</label>
+            <label className="primary-form__label">
+              Password
+            </label>
 
             <input
-              className={styles.input}
+              className="primary-form__input"
               type="password"
-              {...register('password', { required: 'enter data' })}
+              {...register('password', { required: 'enter Password' })}
               placeholder='Enter your Password'
             />
           </div>
 
-          <button type='submit' className={styles.button}>Login</button>
+          <button type='submit' className="primary-form__button">
+            Sign in
+          </button>
         </form >
       </div >
     </section>

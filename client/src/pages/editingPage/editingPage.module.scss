@@ -1,38 +1,14 @@
 @import '../../styles/main.scss';
 
-.registerSection {
+.section {
   display: flex;
-  justify-content: space-around;
-  padding: 25px 0;
-  min-height: 100vh;
-}
-
-.registerBlock {
-  display: flex;
-  flex-direction: column;
-  width: 430px;
   justify-content: center;
-}
-
-.title {
-  margin-bottom: 22px;
-  font-size: $fs-30;
-  font-weight: $fw-500;
-  line-height: 45px;
-}
-
-.description {
-  margin-bottom: 55px;
-  line-height: 25px;
-}
-
-.link {
-  margin-left: 10px;
-  font-weight: $fw-600;
-  color: $color-blue;
+  align-items: center;
+  min-height: calc(100vh - 50px);
 }
 
 .form {
+  min-width: 30%;
   margin-bottom: 60px;
 }
 
@@ -65,8 +41,9 @@
   color: $color-white;
   border: none;
   border-radius: 32px;
-  background-color: $color-blue;
-  @include hover(background-color, $color-light-blue);
+  background-color: $color-blue-charm;
+  text-transform: uppercase;
+  @include hover(background-color, $color-blue-charm-1);
 }
 
 .descriptionGrey {

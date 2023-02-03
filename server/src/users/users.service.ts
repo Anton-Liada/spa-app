@@ -49,17 +49,4 @@ export class UsersService {
       HttpStatus.NOT_FOUND,
     );
   }
-
-  // async getProfile(email: string): Promise<CreateUserDto | null> {
-  //   const user = await this.getUserByEmail(email);
-
-  //   if (!user) {
-  //     return null;
-  //   }
-
-  //   const userDto = new CreateUserDto();
-  //   // userDto.email = user.email;
-  //   // userDto.username = user.username;
-  //   return userDto;
-  // }
 }

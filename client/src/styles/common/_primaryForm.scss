@@ -1,0 +1,45 @@
+@import '../utils';
+
+.primary-form {
+  margin-bottom: 60px;
+
+  &__input-wrapper {
+    margin-bottom: 45px;
+  }
+
+  &__label {
+    display: block;
+    color: $color-grey;
+    font-size: $fs-12;
+  }
+
+  &__input {
+    height: 35px;
+    width: 100%;
+    margin-bottom: 50px;
+    padding-left: 15px;
+    font-family: $ff-montserrat;
+    color: $color-black-1;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid $color-black-1;
+
+    &--margins {
+      margin-bottom: 25px;
+    }
+  }
+
+  &__button {
+    height: 55px;
+    width: 100%;
+    font-size: $fs-18;
+    font-weight: $fw-700;
+    color: $color-white;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 32px;
+    background-color: $color-blue;
+    @include hover(background-color, $color-purple);
+  }
+}

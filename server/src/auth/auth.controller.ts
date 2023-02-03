@@ -15,6 +15,11 @@ import { LocalAuthGuard } from './guards/local-auth.guard';
 export class AuthController {
   constructor(private authService: AuthService) {}
 
+  @Get('/me')
+  check(@Request() req) {
+    return this.authService.checkUser(req.headers.authorization.split(' ')[1]);
+  }
+
   @UseGuards(LocalAuthGuard)
   @Post('/signin')
   async login(@Body() userDto: LoginUserDto) {

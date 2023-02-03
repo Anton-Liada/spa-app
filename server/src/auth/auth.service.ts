@@ -10,6 +10,7 @@ import { UsersService } from 'src/users/users.service';
 import * as bcrypt from 'bcryptjs';
 import { User } from 'src/users/users.model';
 import { LoginUserDto } from './dto/login-user.dto';
+import jwt_decode from 'jwt-decode';
 
 @Injectable()
 export class AuthService {
@@ -32,7 +33,7 @@ export class AuthService {
 
     if (candidate) {
       throw new HttpException(
-        'Пользователь с таким email существует',
+        `User with ${candidate.email} already exists`,
         HttpStatus.BAD_REQUEST,
       );
     }
@@ -48,16 +49,10 @@ export class AuthService {
 
   private async generateToken(user: User) {
     const payload = { email: user.email, id: user.id, roles: user.roles };
-    const { id, email, phone_number, last_name, first_name, nick_name } =
-      await this.userService.getUserByEmail(user.email);
+    const existingUser = await this.userService.getUserByEmail(user.email);
 
     return {
-      id,
-      email,
-      phone_number,
-      last_name,
-      first_name,
-      nick_name,
+      email: existingUser.email || user.email,
       access_token: this.jwtService.sign(payload),
     };
   }
@@ -76,5 +71,22 @@ export class AuthService {
     }
 
     throw new UnauthorizedException();
+  }
+
+  async checkUser(token: string) {
+    if (token) {
+      try {
+        const decoded: CreateUserDto = jwt_decode(token);
+        const existingUser = await this.userService.getUserByEmail(
+          decoded.email,
+        );
+
+        return existingUser.email;
+      } catch (error) {
+        return null;
+      }
+    }
+
+    return null;
   }
 }

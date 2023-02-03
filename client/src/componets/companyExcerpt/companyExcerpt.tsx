@@ -1,26 +1,28 @@
 import React from 'react';
-// import { deleteUser } from '../../features/users/usersSlice';
 import { ICompany } from '../../types/types';
-// import { Button } from '../Button';
+import { ButtonComponent } from '../button';
 import { useAppDispatch } from '/src/features/hooks/hooks';
+import { deleteCompany, fetchOneCompany } from '/src/features/slices/companiesSlice';
+import styles from '../button/button.module.scss';
+import { Link } from 'react-router-dom';
 
-type Props = {
+interface IProps {
   company: ICompany;
-  // isOpenModal: (value: ICompany | null) => void;
-};
+}
 
-export const CompanyExcerpt: React.FC<Props> = ({ company }) => {
-  const { id,
+export const CompanyExcerpt: React.FC<IProps> = ({ company }) => {
+  const {
+    id,
     name,
     address,
     serviceOfActivity,
     numberOfEmployees,
-    author } = company;
+  } = company;
   const dispatch = useAppDispatch();
 
-  // const handleRemoveUser = async () => {
-  //   await dispatch(deleteUser(id));
-  // };
+  const handleRemoveCompany = async (id: number) => {
+    await dispatch(deleteCompany(id));
+  };
 
   return (
     <tr key={id}>
@@ -35,14 +37,14 @@ export const CompanyExcerpt: React.FC<Props> = ({ company }) => {
       <td>{numberOfEmployees}</td>
 
       <td>
-        <button 
-          className="table-button" 
-          // onClick={() => isOpenModal(company)}
-          >
+        <Link
+          className={styles.button}
+          to={`editingCompany/${id}`}
+        >
           update
-        </button>
+        </Link>
 
-        {/* <Button onClick={handleRemoveUser} content="delete" /> */}
+        <ButtonComponent onClick={() => handleRemoveCompany(id)} content="delete" />
       </td>
     </tr>
   );
