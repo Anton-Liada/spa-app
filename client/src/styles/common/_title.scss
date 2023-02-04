@@ -4,4 +4,8 @@
   font-size: $fs-40;
   font-weight: $fw-700;
   line-height: 45px;
+
+  &--size {
+    font-size: $fs-30;
+  }
 }

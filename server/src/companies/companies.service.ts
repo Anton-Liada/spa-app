@@ -46,7 +46,7 @@ export class CompaniesService {
 
       return await this.companyRepository.create(dto);
     } catch (error) {
-      throw new Error('something went wrong');
+      throw new Error(error);
     }
   }
 

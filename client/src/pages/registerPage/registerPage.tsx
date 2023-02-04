@@ -16,7 +16,7 @@ export const RegisterPage: React.FC = () => {
     handleSubmit,
     setError,
     formState: { errors, isValid },
-  } = useForm({
+  } = useForm<IUser>({
     defaultValues: {
       first_name: '',
       last_name: '',

@@ -43,6 +43,9 @@ export class Company extends Model<Company, CompanyCreationAttrs> {
   @Column({ type: DataType.INTEGER })
   numberOfEmployees: number;
 
+  @Column({ type: DataType.STRING, allowNull: false })
+  type: string;
+
   @BelongsTo(() => User)
   author: User;
 }

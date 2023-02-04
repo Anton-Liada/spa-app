@@ -1,0 +1,58 @@
+@import '../utils';
+
+.secondary-form {
+  display: flex;
+  flex-direction: column;
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__input-wrapper {
+    width: 60%;
+
+    &--size {
+      width: 200px;
+    }
+  }
+
+  &__label {
+    font-weight: $fw-500;
+    line-height: 35px;
+  }
+
+  &__input {
+    height: 35px;
+    margin-bottom: 25px;
+    padding-left: 15px;
+    width: 100%;
+    font-family: $ff-montserrat;
+    border: 2px solid $color-black-1;
+    border-radius: 5px;
+    outline: none;
+
+    &:focus {
+      border-color: $color-blue-charm;
+      box-shadow: $shadow;
+    }
+
+    &--size {
+      height: 100px;
+      padding-top: 10px;
+    }
+  }
+
+  &__button {
+    height: 35px;
+    width: 150px;
+    align-self: flex-end;
+    color: $color-white;
+    font-weight: $fw-600;
+    text-transform: uppercase;
+    background-color: $color-blue-charm;
+    border: none;
+    border-radius: 3px;
+    @include hover(background-color, $color-blue-charm-1);
+  }
+}

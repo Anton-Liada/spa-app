@@ -1,10 +1,11 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Status } from "/src/types/enums";
+import { Status } from "../../types/enums";
 import axios from '../../axios';
-import { ILogin, IUser, IUserState } from "/src/types/types";
+import { ILogin, IUser, IAuthState } from "../../types/types";
+import { setError, setStatus } from "../../utils/utils";
 
 export const fetchLogin = createAsyncThunk('auth/fetchLogin', async (params: ILogin) => {
-  const { data } = await axios.post('auth/signin', params)
+  const { data } = await axios.post('auth/signin', params);
 
   return data;
 })
@@ -21,8 +22,8 @@ export const fetchAuth = createAsyncThunk('auth/fetchAuth', async () => {
   return data;
 })
 
-const initialState: IUserState = {
-  user: null,
+const initialState: IAuthState = {
+  email: '',
   status: Status.IDLE,
   error: null,
 };
@@ -32,59 +33,44 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     logout: (state) => {
-      state.user = null;
+      state.email = '';
     }
   },
   extraReducers(builder) {
     builder
-      .addCase(fetchLogin.pending, (state) => {
-        state.status = Status.LOADING;
-      })
+      .addCase(fetchLogin.pending, setStatus)
       .addCase(
         fetchLogin.fulfilled,
-        (state, action: PayloadAction<IUser>) => {
+        (state, action: PayloadAction<string>) => {
           state.status = Status.SUCCEEDED;
-          state.user = action.payload;
+          state.email = action.payload;
         })
-      .addCase(fetchLogin.rejected, (state) => {
-        state.status = Status.FAILED;
-        state.error = 'error';
-      });
+      .addCase(fetchLogin.rejected, setError);
 
-      builder
-      .addCase(fetchAuth.pending, (state) => {
-        state.status = Status.LOADING;
-      })
+    builder
+      .addCase(fetchAuth.pending, setStatus)
       .addCase(
         fetchAuth.fulfilled,
-        (state, action: PayloadAction<IUser>) => {
+        (state, action: PayloadAction<string>) => {
           state.status = Status.SUCCEEDED;
-          state.user = action.payload;
+          state.email = action.payload;
         })
-      .addCase(fetchAuth.rejected, (state) => {
-        state.status = Status.FAILED;
-        state.error = 'error';
-      });
+      .addCase(fetchAuth.rejected, setError);
 
-      builder
-      .addCase(fetchRegister.pending, (state) => {
-        state.status = Status.LOADING;
-      })
+    builder
+      .addCase(fetchRegister.pending, setStatus)
       .addCase(
         fetchRegister.fulfilled,
-        (state, action: PayloadAction<IUser>) => {
+        (state, action: PayloadAction<string>) => {
           state.status = Status.SUCCEEDED;
-          state.user = action.payload;
+          state.email = action.payload;
         })
-      .addCase(fetchRegister.rejected, (state) => {
-        state.status = Status.FAILED;
-        state.error = 'error';
-      });
+      .addCase(fetchRegister.rejected, setError);
   }
 });
 
-export const selectIsLogin = (state: { auth: { user: IUser | null } }) => (
-  Boolean(state.auth.user)
+export const selectIsLogin = (state: { auth: { email: string } }) => (
+  Boolean(state.auth.email)
 );
 
 export default authSlice.reducer;

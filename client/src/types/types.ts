@@ -1,7 +1,7 @@
 import { Status } from "./enums";
 
 export interface IUser {
-  id?: number;
+  id: number;
   email: string;
   phone_number: number | null;
   last_name: string;
@@ -9,6 +9,7 @@ export interface IUser {
   nick_name: string;
   roles?: string[];
   companies?: ICompany[];
+  password?: string;
 }
 
 export interface ICompany {
@@ -18,6 +19,7 @@ export interface ICompany {
   serviceOfActivity: string;
   userId: number;
   numberOfEmployees: number | null;
+  type: string;
   author: IUser;
 }
 
@@ -28,8 +30,14 @@ export interface ICompaniesState {
   error: null | string;
 }
 
-export interface IUserState {
-  user: IUser | null;
+export interface IAuthState {
+  email: string;
+  status: Status;
+  error: null | string;
+}
+
+export interface IUsersState {
+  users: IUser[];
   status: Status;
   error: null | string;
 }
@@ -41,4 +49,13 @@ export interface ISelectedPage {
 export interface ILogin {
   email: string;
   password: string;
+}
+
+export interface ISetStatus {
+  status: Status;
+}
+
+export interface ISetError {
+  status: Status;
+  error: string | null;
 }

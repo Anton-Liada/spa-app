@@ -1,5 +1,4 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import { HeaderLink } from '../headerLink';
 import { useAppDispatch } from '/src/features/hooks/hooks';
 import { logout } from '/src/features/slices/authSlice';
@@ -25,8 +24,14 @@ export const Header: React.FC = () => {
           <div className="nav__content">
             <div className="nav__list">
               <HeaderLink
-                content='Companies'
+                content='Home'
                 to='/'
+                style='nav__link'
+              />
+  
+              <HeaderLink
+                content='Companies'
+                to='/Companies'
                 style='nav__link'
               />
 

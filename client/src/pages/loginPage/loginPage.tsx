@@ -41,7 +41,7 @@ export const LoginPage: React.FC = () => {
   };
 
   return (
-    <section className="login-section">
+    <section className="login-section contai">
       <div className="login-block">
         <AuthComponent to='register' content='Register here !' title='Sign in' />
 

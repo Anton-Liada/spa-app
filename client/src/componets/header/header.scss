@@ -7,14 +7,16 @@
 
 .nav {
   padding: 0 75px;
-  max-width: 1440px;
+  max-width: 1200px;
   width: 100%;
   margin: 0 auto;
   color: $color-white;
 
   &__title {
-    font-size: $fs-30;
-    font-weight: $fw-600;
+    font-family: $ff-cabin;
+    font-size: $fs-40;
+    font-weight: $fw-700;
+    line-height: 70px;
   }
 
   &__content {
@@ -29,7 +31,7 @@
     &,
     &:active {
       font-weight: $fw-700;
-      padding: 0.25rem 1.5rem;
+      padding: 10px 10px 15px;
       border-radius: 4px;
       background: $color-purple-1;
     }

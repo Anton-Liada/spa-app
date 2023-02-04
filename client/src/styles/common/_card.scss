@@ -1,0 +1,64 @@
+@import '../../styles/utils';
+
+.card {
+  padding: 10px 20px;
+  border: 1px solid $color-purple;
+  border-radius: 5px;
+  box-shadow: $shadow;
+
+  &__title {
+    margin-bottom: 20px;
+    font-size: $fs-20;
+
+    &--size {
+      font-size: $fs-30;
+    }
+  }
+
+  &__caption {
+    margin-bottom: 15px;
+    font-size: $fs-14;
+    color: $color-grey;
+    font-style: italic;
+  }
+
+  &__description {
+    margin-bottom: 25px;
+    font-size: $fs-16;
+  }
+
+  &__link {
+    display: inline-block;
+    padding: 7px;
+    font-weight: $fw-500;
+    border: 1.5px solid $color-grey;
+    border-radius: 4px;
+    @include hover(border-color, $color-black-1);
+    transition: border-color, background-color, color, $transition-time;
+
+    &:hover {
+      border-color: $color-black-1;
+      background-color: $color-purple;
+      color: $color-white;
+    }
+  }
+
+  &__buttons-wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 18%;
+    margin-left: auto;
+  }
+
+  &__button {
+    padding: 7px;
+    align-self: flex-end;
+    color: $color-white;
+    font-weight: $fw-500;
+    text-transform: uppercase;
+    background-color: $color-blue-charm;
+    border: none;
+    border-radius: 3px;
+    @include hover(background-color, $color-blue-charm-1);
+  }
+}

@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from '../../axios';
 import { Status } from '/src/types/enums';
 import { ICompany, ICompaniesState } from '/src/types/types';
+import { setError, setStatus } from '/src/utils/utils';
 
 const initialState: ICompaniesState = {
   companies: [],
@@ -22,6 +23,7 @@ export const fetchCompanies = createAsyncThunk(
 export const createNewCompany = createAsyncThunk(
   'companies/createNewCompany',
   async (company: ICompany) => {
+    console.log(company)
     const { data } = await axios.post('companies', company);
 
     return data;
@@ -55,15 +57,6 @@ export const fetchOneCompany = createAsyncThunk(
   }
 );
 
-const setStatus = (state: ICompaniesState) => {
-  state.status = Status.LOADING;
-};
-
-const setError = (state: ICompaniesState) => {
-  state.status = Status.FAILED;
-  state.error = 'Something went wrong';
-};
-
 const companiesSlice = createSlice({
   name: 'companies',
   initialState,
@@ -75,7 +68,7 @@ const companiesSlice = createSlice({
         fetchCompanies.fulfilled,
         (state, action: PayloadAction<ICompany[]>) => {
           state.status = Status.SUCCEEDED;
-          state.companies = action.payload.map(article => article);
+          state.companies = action.payload.map(company => company);
         })
       .addCase(fetchCompanies.rejected, setError);
 
@@ -93,8 +86,14 @@ const companiesSlice = createSlice({
       .addCase(updateCompany.pending, setStatus)
       .addCase(updateCompany.fulfilled, (state, action: PayloadAction<ICompany>) => {
         state.status = Status.SUCCEEDED;
-        const { id, name, address, serviceOfActivity, numberOfEmployees } =
-          action.payload;
+        const {
+          id,
+          name,
+          address,
+          serviceOfActivity,
+          numberOfEmployees,
+          type,
+        } = action.payload;
         const existingCompany = state.companies.find(company => company.id === id);
 
         if (existingCompany) {
@@ -102,6 +101,7 @@ const companiesSlice = createSlice({
           existingCompany.serviceOfActivity = serviceOfActivity;
           existingCompany.numberOfEmployees = numberOfEmployees;
           existingCompany.address = address;
+          existingCompany.type = type;
         }
       })
       .addCase(updateCompany.rejected, setError);

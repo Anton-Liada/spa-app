@@ -1,0 +1,15 @@
+@import '../../styles/utils';
+
+.add-section {
+  max-width: 800px;
+  margin: 50px auto;
+
+  &__title {
+    margin-bottom: 40px;
+  }
+}
+
+.disabled-btn {
+  opacity: 0.3;
+  cursor: initial;
+}

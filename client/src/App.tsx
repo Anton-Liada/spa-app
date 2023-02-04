@@ -6,7 +6,7 @@ import { HomePage } from './pages/homePage';
 import { useAppDispatch, useAppSelector } from './features/hooks/hooks';
 import { fetchAuth, selectIsLogin } from './features/slices/authSlice';
 import { Header } from './componets/header';
-import { EditingPage } from './pages/editingPage';
+import { SingleCompanyPage } from './pages/singleCompanyPage';
 
 export const App: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -20,14 +20,12 @@ export const App: React.FC = () => {
     <>
       {isAuth && <Header />}
 
-      <div className='contaner'>
         <Routes>
-          <Route path='/' element={<HomePage />} />
           <Route path='/login' element={<LoginPage />} />
           <Route path='/register' element={<RegisterPage />} />
-          <Route path="/editingCompany/:id" element={<EditingPage />} />
+          <Route path='/' element={<HomePage />} />
+          <Route path="/companies/:id" element={<SingleCompanyPage />} />
         </Routes>
-      </div>
     </>
   );
 };
