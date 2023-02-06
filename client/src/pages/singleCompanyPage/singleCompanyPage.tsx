@@ -2,19 +2,18 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../features/hooks/hooks';
 import { deleteCompany, fetchOneCompany } from '../../features/slices/companiesSlice';
-import './singleCompanyPage.scss';
 import { Modal } from '../../componets/modal';
 import { Notification } from '/src/componets/notification';
+import './singleCompanyPage.scss';
 
 export const SingleCompanyPage: React.FC = () => {
   const [isShowNotification, setIsShowNotification] = useState(false);
-  const [isOpenModal, setIsOpenModal] = useState(false)
+  const [isOpenModal, setIsOpenModal] = useState(false);
   const nav = useNavigate();
   const { id = null } = useParams();
   const dispatch = useAppDispatch();
-  const company = useAppSelector((state) =>
-    state.companies.selectedCompany);
-  const profile = useAppSelector(state => state.profile.profile);
+  const company = useAppSelector((state) => state.companies.selectedCompany);
+  const profile = useAppSelector((state) => state.profile.profile);
 
   useEffect(() => {
     dispatch(fetchOneCompany(Number(id)));
@@ -29,6 +28,10 @@ export const SingleCompanyPage: React.FC = () => {
 
     nav('/profile');
   };
+
+  if (!company) {
+    return <h3 className="title title--position">Company not found</h3>
+  }
 
   const isMyCompany = profile?.id === company?.userId;
 

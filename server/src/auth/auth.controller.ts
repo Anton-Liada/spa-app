@@ -22,19 +22,12 @@ export class AuthController {
 
   @UseGuards(LocalAuthGuard)
   @Post('/signin')
-  async login(@Body() userDto: LoginUserDto) {
-    return await this.authService.login(userDto);
+  async login(@Body() payload: LoginUserDto) {
+    return await this.authService.login(payload);
   }
 
   @Post('/signup')
-  async registration(@Body() userDto: CreateUserDto) {
-    return await this.authService.registration(userDto);
+  async registration(@Body() payload: CreateUserDto) {
+    return await this.authService.registration(payload);
   }
-
-  // @Get('/logout')
-  // logout(@Request() req): any {
-  //   console.log(req)
-  //   req.session.destroy();
-  //   return { message: 'The user session has ended' };
-  // }
 }

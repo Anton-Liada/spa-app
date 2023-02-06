@@ -20,8 +20,8 @@ export const LoginPage: React.FC = () => {
   } = useForm<ILogin>({
     mode: 'onChange',
     defaultValues: {
-      email: 'ADMIN3',
-      password: 'ADMIN3',
+      email: 'liadaanton@gmail.com',
+      password: '775577',
     }
   });
 
