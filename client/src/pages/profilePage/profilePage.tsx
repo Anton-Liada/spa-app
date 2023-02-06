@@ -1,14 +1,14 @@
-import React, { useMemo } from 'react'
-import { useAppSelector } from '/src/features/hooks/hooks'
-import { CompaniesList } from '/src/componets/companiesList';
+import React, { useMemo } from 'react';
 import './profilePage.scss';
+import { CompaniesList } from '/src/componets/companiesList';
+import { useAppSelector } from '/src/features/hooks/hooks';
 
 export const ProfilePage: React.FC = () => {
   const profile = useAppSelector(state => state.profile.profile);
   const companies = useAppSelector(state => state.companies.companies);
 
   const myCompanies = useMemo(() => {
-    return companies.filter(({ userId }) => userId === profile?.id)
+    return companies.filter(({ userId }) => userId === profile?.id);
   }, [companies]);
 
   return (
@@ -25,9 +25,7 @@ export const ProfilePage: React.FC = () => {
 
           <div className="profile-block__info">
             <ul className="info-list">
-              <li className="title">
-                {profile?.nick_name}
-              </li>
+              <li className="title">{profile?.nick_name}</li>
 
               <li className="info-list__item">
                 {`First name: ${profile?.first_name}`}
@@ -37,9 +35,7 @@ export const ProfilePage: React.FC = () => {
                 {`Last name: ${profile?.last_name}`}
               </li>
 
-              <li className="info-list__item">
-                {`Email: ${profile?.email}`}
-              </li>
+              <li className="info-list__item">{`Email: ${profile?.email}`}</li>
 
               <li className="info-list__item">
                 {`Role: ${profile?.roles?.map(role => role.position)}`}
@@ -49,7 +45,7 @@ export const ProfilePage: React.FC = () => {
         </div>
       </section>
 
-      <CompaniesList companies={myCompanies} title='My companies' />
+      <CompaniesList companies={myCompanies} title="My companies" />
     </>
-  )
-}
+  );
+};

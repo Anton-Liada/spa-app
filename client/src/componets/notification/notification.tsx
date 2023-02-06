@@ -2,13 +2,16 @@ import React, { useEffect } from 'react';
 import './notification.scss';
 
 interface INotification {
-  message?: string | null,
-  isShowNotification: boolean,
-  setIsShowNotification: (value: boolean) => void,
+  message?: string | null;
+  isShowNotification: boolean;
+  setIsShowNotification: (value: boolean) => void;
 }
 
-export const Notification: React.FC<INotification> = ({ message, isShowNotification, setIsShowNotification }) => {
-
+export const Notification: React.FC<INotification> = ({
+  message,
+  isShowNotification,
+  setIsShowNotification,
+}) => {
   useEffect(() => {
     const hideMessage = setTimeout(() => {
       setIsShowNotification(false);
@@ -21,7 +24,7 @@ export const Notification: React.FC<INotification> = ({ message, isShowNotificat
 
   const handleHideNotification = () => {
     setIsShowNotification(false);
-  }
+  };
 
   return (
     <div

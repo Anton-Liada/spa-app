@@ -1,17 +1,14 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Status } from "/src/types/enums";
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from '../../axios';
-import { IUser, IUsersState } from "/src/types/types";
-import { setError, setStatus } from "/src/utils/utils";
+import { Status } from '../../types/enums';
+import { IUser, IUsersState } from '../../types/types';
+import { setError, setStatus } from '../../utils/utils';
 
-export const fetchUsers = createAsyncThunk(
-  'users/fetchUsers',
-  async () => {
-    const { data } = await axios.get('users');
+export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
+  const { data } = await axios.get('users');
 
-    return data;
-  }
-);
+  return data;
+});
 
 const initialState: IUsersState = {
   users: [],
@@ -31,9 +28,10 @@ const usersSlice = createSlice({
         (state, action: PayloadAction<IUser[]>) => {
           state.status = Status.SUCCEEDED;
           state.users = action.payload.map(user => user);
-        })
+        },
+      )
       .addCase(fetchUsers.rejected, setError);
-  }
+  },
 });
 
 export default usersSlice.reducer;

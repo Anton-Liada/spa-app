@@ -1,17 +1,22 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { useAppDispatch } from '../../features/hooks/hooks';
-import { fetchLogin } from '../../features/slices/authSlice';
-import { ILogin } from '../../types/types';
+import { useNavigate } from 'react-router-dom';
 import { AuthComponent } from '../../componets/authComponent';
+import { useAppDispatch, useAppSelector } from '../../features/hooks/hooks';
+import { fetchLogin, selectIsLogin } from '../../features/slices/authSlice';
+import { ILogin } from '../../types/types';
+import './loginPage.scss';
 import { InputErrors } from '/src/types/enums';
 import { regexpEmail } from '/src/utils/regexp';
-import './loginPage.scss';
 
 export const LoginPage: React.FC = () => {
   const dispatch = useAppDispatch();
   const nav = useNavigate();
+  const isAuth = useAppSelector(selectIsLogin);
+
+  if (isAuth) {
+    nav('/');
+  }
 
   const {
     register,
@@ -22,7 +27,7 @@ export const LoginPage: React.FC = () => {
     defaultValues: {
       email: 'liadaanton@gmail.com',
       password: '775577',
-    }
+    },
   });
 
   const onSubmit = async (values: ILogin) => {
@@ -38,29 +43,28 @@ export const LoginPage: React.FC = () => {
 
       nav('/');
     } catch (error) {
-      throw new Error('something went wrong')
+      throw new Error('something went wrong');
     }
   };
 
   return (
     <section className="login-section contai">
       <div className="login-block">
-        <AuthComponent to='register' content='Register here !' title='Sign in' />
+        <AuthComponent
+          to="register"
+          content="Register here !"
+          title="Sign in"
+        />
 
-        <form
-          className="primary-form"
-          onSubmit={handleSubmit(onSubmit)}
-        >
+        <form className="primary-form" onSubmit={handleSubmit(onSubmit)}>
           <div className="primary-form__input-wrapper">
             <div className="primary-form__field-block">
-              <label className="primary-form__label">
-                Email
-              </label>
+              <label className="primary-form__label">Email</label>
 
               <input
                 className="primary-form__input"
                 type="text"
-                placeholder='Enter your Email address'
+                placeholder="Enter your Email address"
                 {...register('email', {
                   required: InputErrors.REQUIRED,
                   pattern: {
@@ -73,7 +77,7 @@ export const LoginPage: React.FC = () => {
                   },
                 })}
               />
-              
+
               <div className="modal-card__message">
                 {errors?.email &&
                   `${errors?.email?.message || InputErrors.ERROR}`}
@@ -81,14 +85,12 @@ export const LoginPage: React.FC = () => {
             </div>
 
             <div className="primary-form__field-block">
-              <label className="primary-form__label">
-                Password
-              </label>
+              <label className="primary-form__label">Password</label>
 
               <input
                 className="primary-form__input"
                 type="password"
-                placeholder='Enter your Password'
+                placeholder="Enter your Password"
                 {...register('password', {
                   required: InputErrors.REQUIRED,
                   minLength: {
@@ -109,11 +111,11 @@ export const LoginPage: React.FC = () => {
             </div>
           </div>
 
-          <button type='submit' className="primary-form__button">
+          <button type="submit" className="primary-form__button">
             Sign in
           </button>
-        </form >
-      </div >
+        </form>
+      </div>
     </section>
-  )
-}
+  );
+};

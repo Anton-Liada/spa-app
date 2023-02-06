@@ -1,17 +1,22 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '/src/features/hooks/hooks';
-import { fetchRegister } from '/src/features/slices/authSlice';
-import { IUser } from '/src/types/types';
 import { AuthComponent } from '../../componets/authComponent';
 import './registerPage.scss';
+import { useAppDispatch, useAppSelector } from '/src/features/hooks/hooks';
+import { fetchRegister, selectIsLogin } from '/src/features/slices/authSlice';
 import { InputErrors } from '/src/types/enums';
+import { IUser } from '/src/types/types';
 import { regexpEmail, regexpNumbers, regexpWords } from '/src/utils/regexp';
 
 export const RegisterPage: React.FC = () => {
   const dispatch = useAppDispatch();
   const nav = useNavigate();
+  const isAuth = useAppSelector(selectIsLogin);
+
+  if (isAuth) {
+    nav('/');
+  }
 
   const {
     register,
@@ -26,11 +31,11 @@ export const RegisterPage: React.FC = () => {
       phone_number: null,
       email: '',
       password: '',
-    }
+    },
   });
 
   const onSubmit = async (values: IUser) => {
-    console.log('values', values)
+    console.log('values', values);
     try {
       const data = await dispatch(fetchRegister(values));
       if (!data.payload) {
@@ -43,34 +48,24 @@ export const RegisterPage: React.FC = () => {
 
       nav('/');
     } catch (error) {
-      throw new Error('something went wrong')
+      throw new Error('something went wrong');
     }
   };
 
   return (
     <section className="register-section container">
       <div className="register-block">
-        <AuthComponent
-          to='login'
-          title='Sign up'
-          content='Login here !'
-        />
+        <AuthComponent to="login" title="Sign up" content="Login here !" />
 
-        <form
-          className="primary-form"
-          onSubmit={handleSubmit(onSubmit)}
-        >
+        <form className="primary-form" onSubmit={handleSubmit(onSubmit)}>
           <div className="primary-form__input-wrapper">
-
             <div className="primary-form__field-block--margins">
-              <label className="primary-form__label">
-                First name
-              </label>
+              <label className="primary-form__label">First name</label>
 
               <input
                 className="primary-form__input primary-form__input--margins"
                 type="text"
-                placeholder='Enter your First name'
+                placeholder="Enter your First name"
                 {...register('first_name', {
                   required: InputErrors.REQUIRED,
                   minLength: {
@@ -95,13 +90,12 @@ export const RegisterPage: React.FC = () => {
             </div>
 
             <div className="primary-form__field-block--margins">
-
               <label className="primary-form__label">Last name</label>
 
               <input
                 className="primary-form__input primary-form__input--margins"
                 type="text"
-                placeholder='Enter your Last name'
+                placeholder="Enter your Last name"
                 {...register('last_name', {
                   required: InputErrors.REQUIRED,
                   minLength: {
@@ -125,16 +119,13 @@ export const RegisterPage: React.FC = () => {
               </div>
             </div>
 
-
             <div className="primary-form__field-block--margins">
-              <label className="primary-form__label">
-                Username
-              </label>
+              <label className="primary-form__label">Username</label>
 
               <input
                 className="primary-form__input primary-form__input--margins"
                 type="text"
-                placeholder='Enter your User name'
+                placeholder="Enter your User name"
                 {...register('nick_name', {
                   required: InputErrors.REQUIRED,
                   minLength: {
@@ -158,16 +149,14 @@ export const RegisterPage: React.FC = () => {
               </div>
             </div>
 
-
             <div className="primary-form__field-block--margins">
-
               <label className="primary-form__label">Phone</label>
 
               <input
                 {...register('phone_number', { required: 'enter data' })}
                 className="primary-form__input primary-form__input--margins"
                 type="phone"
-                placeholder='Enter your Phone'
+                placeholder="Enter your Phone"
                 {...register('phone_number', {
                   required: InputErrors.REQUIRED,
                   pattern: {
@@ -192,14 +181,12 @@ export const RegisterPage: React.FC = () => {
             </div>
 
             <div className="primary-form__field-block--margins">
-              <label className="primary-form__label">
-                Email
-              </label>
+              <label className="primary-form__label">Email</label>
 
               <input
                 className="primary-form__input"
                 type="text"
-                placeholder='Enter your Email address'
+                placeholder="Enter your Email address"
                 {...register('email', {
                   required: InputErrors.REQUIRED,
                   pattern: {
@@ -219,14 +206,12 @@ export const RegisterPage: React.FC = () => {
             </div>
 
             <div className="primary-form__field-block--margins">
-              <label className="primary-form__label">
-                Password
-              </label>
+              <label className="primary-form__label">Password</label>
 
               <input
                 className="primary-form__input"
                 type="password"
-                placeholder='Enter your Password'
+                placeholder="Enter your Password"
                 {...register('password', {
                   required: InputErrors.REQUIRED,
                   minLength: {
@@ -247,16 +232,15 @@ export const RegisterPage: React.FC = () => {
             </div>
           </div>
 
-          <button type='submit' className="primary-form__button">
+          <button type="submit" className="primary-form__button">
             Sign up
           </button>
-        </form >
-      </div >
+        </form>
+      </div>
 
       <div className="register-block__image-wrapper">
         <div className="register-block__image"></div>
       </div>
     </section>
-  )
-}
-
+  );
+};

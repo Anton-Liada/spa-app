@@ -13,7 +13,7 @@ export const AddCompanyForm: React.FC = () => {
   return (
     <>
       <Notification
-        message='created'
+        message="created"
         isShowNotification={isShowNotification}
         setIsShowNotification={setIsShowNotification}
       />
@@ -25,5 +25,5 @@ export const AddCompanyForm: React.FC = () => {
         <FormComponent onClick={handleShowNotification} />
       </section>
     </>
-  )
-}
+  );
+};

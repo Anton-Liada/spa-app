@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../features/hooks/hooks';
-import { deleteCompany, fetchOneCompany } from '../../features/slices/companiesSlice';
 import { Modal } from '../../componets/modal';
-import { Notification } from '/src/componets/notification';
+import { useAppDispatch, useAppSelector } from '../../features/hooks/hooks';
+import {
+  deleteCompany,
+  fetchOneCompany,
+} from '../../features/slices/companiesSlice';
 import './singleCompanyPage.scss';
+import { Notification } from '/src/componets/notification';
 
 export const SingleCompanyPage: React.FC = () => {
   const [isShowNotification, setIsShowNotification] = useState(false);
@@ -12,8 +15,8 @@ export const SingleCompanyPage: React.FC = () => {
   const nav = useNavigate();
   const { id = null } = useParams();
   const dispatch = useAppDispatch();
-  const company = useAppSelector((state) => state.companies.selectedCompany);
-  const profile = useAppSelector((state) => state.profile.profile);
+  const company = useAppSelector(state => state.companies.selectedCompany);
+  const profile = useAppSelector(state => state.profile.profile);
 
   useEffect(() => {
     dispatch(fetchOneCompany(Number(id)));
@@ -30,14 +33,14 @@ export const SingleCompanyPage: React.FC = () => {
   };
 
   if (!company) {
-    return <h3 className="title title--position">Company not found</h3>
+    return <h3 className="title title--position">Company not found</h3>;
   }
 
   const isMyCompany = profile?.id === company?.userId;
 
   const handleOpenModal = () => {
     setIsOpenModal(true);
-  }
+  };
 
   const handleShowNotification = () => {
     setIsShowNotification(true);
@@ -45,34 +48,30 @@ export const SingleCompanyPage: React.FC = () => {
 
   return (
     <div className="update-page">
-
       <Notification
-       message='updated'
-       isShowNotification={isShowNotification}
-       setIsShowNotification={setIsShowNotification}
+        message="updated"
+        isShowNotification={isShowNotification}
+        setIsShowNotification={setIsShowNotification}
       />
 
       {isOpenModal && (
-      <Modal 
-        setIsOpenModal={setIsOpenModal} 
-        onClick={handleShowNotification}
-      />)}
+        <Modal
+          setIsOpenModal={setIsOpenModal}
+          onClick={handleShowNotification}
+        />
+      )}
 
       <section className="company-section container-small">
         <div className="card company-section__card">
-          <h3 className="card__title card__title--size">
-            {company?.name}
-          </h3>
+          <h3 className="card__title card__title--size">{company?.name}</h3>
 
-          <p className="card__description">
-            {company?.serviceOfActivity}
-          </p>
+          <p className="card__description">{company?.serviceOfActivity}</p>
 
           <p>
             <span className="card__span">Address:</span>
             {` ${company?.address}`}
           </p>
-            
+
           <p>
             <span className="card__span">Type:</span>
             {` ${company?.type}`}
@@ -83,7 +82,7 @@ export const SingleCompanyPage: React.FC = () => {
             {` ${company?.numberOfEmployees}`}
           </p>
 
-          {isMyCompany &&
+          {isMyCompany && (
             <div className="card__buttons-wrapper">
               <button className="card__button" onClick={handleOpenModal}>
                 update
@@ -93,7 +92,7 @@ export const SingleCompanyPage: React.FC = () => {
                 delete
               </button>
             </div>
-          }
+          )}
         </div>
 
         <Link to={`/companies`} className="card__link">
@@ -101,5 +100,5 @@ export const SingleCompanyPage: React.FC = () => {
         </Link>
       </section>
     </div>
-  )
-}
+  );
+};

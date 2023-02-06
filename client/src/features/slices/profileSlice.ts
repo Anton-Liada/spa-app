@@ -1,8 +1,8 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Status } from "/src/types/enums";
-import { IProfileState, IUser } from "/src/types/types";
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from '../../axios';
-import { setError, setStatus } from "/src/utils/utils";
+import { Status } from '../../types/enums';
+import { IProfileState, IUser } from '../../types/types';
+import { setError, setStatus } from '../../utils/utils';
 
 export const fetchProfile = createAsyncThunk(
   'profile/fetchProfile',
@@ -10,7 +10,7 @@ export const fetchProfile = createAsyncThunk(
     const { data } = await axios.get(`profile`);
 
     return data;
-  }
+  },
 );
 
 const initialState: IProfileState = {
@@ -31,10 +31,10 @@ const profileSlice = createSlice({
         (state, action: PayloadAction<IUser>) => {
           state.status = Status.SUCCEEDED;
           state.profile = action.payload;
-        }
+        },
       )
       .addCase(fetchProfile.rejected, setError);
-  }
-})
+  },
+});
 
 export default profileSlice.reducer;

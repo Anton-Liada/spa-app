@@ -1,4 +1,4 @@
-import { Status } from "./enums";
+import { Status } from './enums';
 
 export interface IUser {
   id: number;
@@ -48,9 +48,9 @@ export interface IUsersState {
 }
 
 export interface IProfileState {
-  profile: IUser | null,
-  status: Status,
-  error: null,
+  profile: IUser | null;
+  status: Status;
+  error: null;
 }
 
 export interface ISelectedPage {
