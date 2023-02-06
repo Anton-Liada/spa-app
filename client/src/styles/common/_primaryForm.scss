@@ -16,16 +16,19 @@
   &__input {
     height: 35px;
     width: 100%;
-    margin-bottom: 50px;
     padding-left: 15px;
     font-family: $ff-montserrat;
     color: $color-black-1;
     outline: none;
     border: none;
     border-bottom: 2px solid $color-black-1;
+  }
+
+  &__field-block {
+    margin-bottom: 40px;
 
     &--margins {
-      margin-bottom: 25px;
+      margin-bottom: 20px;
     }
   }
 

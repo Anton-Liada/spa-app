@@ -3,10 +3,11 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../features/hooks/hooks';
 import { deleteCompany, fetchOneCompany } from '../../features/slices/companiesSlice';
 import './singleCompanyPage.scss';
-import { Modal } from '/src/componets/Modal';
-import { ICompany } from '/src/types/types';
+import { Modal } from '../../componets/modal';
+import { Notification } from '/src/componets/notification';
 
 export const SingleCompanyPage: React.FC = () => {
+  const [isShowNotification, setIsShowNotification] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false)
   const nav = useNavigate();
   const { id = null } = useParams();
@@ -26,7 +27,7 @@ export const SingleCompanyPage: React.FC = () => {
       throw new Error('somethig went wrong');
     }
 
-    nav('/');
+    nav('/profile');
   };
 
   const isMyCompany = profile?.id === company?.userId;
@@ -35,9 +36,24 @@ export const SingleCompanyPage: React.FC = () => {
     setIsOpenModal(true);
   }
 
+  const handleShowNotification = () => {
+    setIsShowNotification(true);
+  };
+
   return (
-    <>
-      {isOpenModal && <Modal setIsOpenModal={setIsOpenModal} />}
+    <div className="update-page">
+
+      <Notification
+       message='updated'
+       isShowNotification={isShowNotification}
+       setIsShowNotification={setIsShowNotification}
+      />
+
+      {isOpenModal && (
+      <Modal 
+        setIsOpenModal={setIsOpenModal} 
+        onClick={handleShowNotification}
+      />)}
 
       <section className="company-section container-small">
         <div className="card company-section__card">
@@ -81,6 +97,6 @@ export const SingleCompanyPage: React.FC = () => {
           Back to Companies page
         </Link>
       </section>
-    </>
+    </div>
   )
 }

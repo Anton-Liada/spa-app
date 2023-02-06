@@ -5,6 +5,8 @@ import { useAppDispatch } from '../../features/hooks/hooks';
 import { fetchLogin } from '../../features/slices/authSlice';
 import { ILogin } from '../../types/types';
 import { AuthComponent } from '../../componets/authComponent';
+import { InputErrors } from '/src/types/enums';
+import { regexpEmail } from '/src/utils/regexp';
 import './loginPage.scss';
 
 export const LoginPage: React.FC = () => {
@@ -14,9 +16,9 @@ export const LoginPage: React.FC = () => {
   const {
     register,
     handleSubmit,
-    setError,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm<ILogin>({
+    mode: 'onChange',
     defaultValues: {
       email: 'ADMIN3',
       password: 'ADMIN3',
@@ -50,27 +52,61 @@ export const LoginPage: React.FC = () => {
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className="primary-form__input-wrapper">
-            <label className="primary-form__label">
-              Email
-            </label>
+            <div className="primary-form__field-block">
+              <label className="primary-form__label">
+                Email
+              </label>
 
-            <input
-              className="primary-form__input"
-              type="text"
-              {...register('email', { required: 'enter Email' })}
-              placeholder='Enter your Email address'
-            />
+              <input
+                className="primary-form__input"
+                type="text"
+                placeholder='Enter your Email address'
+                {...register('email', {
+                  required: InputErrors.REQUIRED,
+                  pattern: {
+                    value: regexpEmail,
+                    message: InputErrors.PATTERN_EMAIL,
+                  },
+                  maxLength: {
+                    value: 30,
+                    message: InputErrors.MAX_LENGTH,
+                  },
+                })}
+              />
+              
+              <div className="modal-card__message">
+                {errors?.email &&
+                  `${errors?.email?.message || InputErrors.ERROR}`}
+              </div>
+            </div>
 
-            <label className="primary-form__label">
-              Password
-            </label>
+            <div className="primary-form__field-block">
+              <label className="primary-form__label">
+                Password
+              </label>
 
-            <input
-              className="primary-form__input"
-              type="password"
-              {...register('password', { required: 'enter Password' })}
-              placeholder='Enter your Password'
-            />
+              <input
+                className="primary-form__input"
+                type="password"
+                placeholder='Enter your Password'
+                {...register('password', {
+                  required: InputErrors.REQUIRED,
+                  minLength: {
+                    value: 6,
+                    message: InputErrors.MIN_LENGTH_PASSWORD,
+                  },
+                  maxLength: {
+                    value: 15,
+                    message: InputErrors.MAX_LENGTH,
+                  },
+                })}
+              />
+
+              <div className="modal-card__message">
+                {errors?.password &&
+                  `${errors?.password?.message || InputErrors.ERROR}`}
+              </div>
+            </div>
           </div>
 
           <button type='submit' className="primary-form__button">

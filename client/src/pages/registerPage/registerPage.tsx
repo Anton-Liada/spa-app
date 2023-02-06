@@ -6,6 +6,8 @@ import { fetchRegister } from '/src/features/slices/authSlice';
 import { IUser } from '/src/types/types';
 import { AuthComponent } from '../../componets/authComponent';
 import './registerPage.scss';
+import { InputErrors } from '/src/types/enums';
+import { regexpEmail, regexpNumbers, regexpWords } from '/src/utils/regexp';
 
 export const RegisterPage: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -14,9 +16,9 @@ export const RegisterPage: React.FC = () => {
   const {
     register,
     handleSubmit,
-    setError,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm<IUser>({
+    mode: 'onChange',
     defaultValues: {
       first_name: '',
       last_name: '',
@@ -28,7 +30,7 @@ export const RegisterPage: React.FC = () => {
   });
 
   const onSubmit = async (values: IUser) => {
-    console.log('values',values)
+    console.log('values', values)
     try {
       const data = await dispatch(fetchRegister(values));
       if (!data.payload) {
@@ -59,59 +61,190 @@ export const RegisterPage: React.FC = () => {
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className="primary-form__input-wrapper">
-            <label className="primary-form__label">First name</label>
 
-            <input
-              {...register('first_name', { required: 'enter data' })}
-              className="primary-form__input primary-form__input--margins"
-              type="text"
-              placeholder='Enter your First name'
-            />
+            <div className="primary-form__field-block--margins">
+              <label className="primary-form__label">
+                First name
+              </label>
 
-            <label className="primary-form__label">Last name</label>
+              <input
+                className="primary-form__input primary-form__input--margins"
+                type="text"
+                placeholder='Enter your First name'
+                {...register('first_name', {
+                  required: InputErrors.REQUIRED,
+                  minLength: {
+                    value: 4,
+                    message: InputErrors.MIN_LENGTH,
+                  },
+                  pattern: {
+                    value: regexpWords,
+                    message: InputErrors.PATTERN,
+                  },
+                  maxLength: {
+                    value: 30,
+                    message: InputErrors.MAX_LENGTH,
+                  },
+                })}
+              />
 
-            <input
-              {...register('last_name', { required: 'enter data' })}
-              className="primary-form__input primary-form__input--margins"
-              type="text"
-              placeholder='Enter your Last name'
-            />
+              <div className="modal-card__message">
+                {errors?.first_name &&
+                  `${errors?.first_name?.message || InputErrors.ERROR}`}
+              </div>
+            </div>
 
-            <label className="primary-form__label">Username</label>
+            <div className="primary-form__field-block--margins">
 
-            <input
-              {...register('nick_name', { required: 'enter data' })}
-              className="primary-form__input primary-form__input--margins"
-              type="text"
-              placeholder='Enter your User name'
-            />
+              <label className="primary-form__label">Last name</label>
 
-            <label className="primary-form__label">Phone</label>
+              <input
+                className="primary-form__input primary-form__input--margins"
+                type="text"
+                placeholder='Enter your Last name'
+                {...register('last_name', {
+                  required: InputErrors.REQUIRED,
+                  minLength: {
+                    value: 4,
+                    message: InputErrors.MIN_LENGTH,
+                  },
+                  pattern: {
+                    value: regexpWords,
+                    message: InputErrors.PATTERN,
+                  },
+                  maxLength: {
+                    value: 30,
+                    message: InputErrors.MAX_LENGTH,
+                  },
+                })}
+              />
 
-            <input
-              {...register('phone_number', { required: 'enter data' })}
-              className="primary-form__input primary-form__input--margins"
-              type="phone"
-              placeholder='Enter your Phone'
-            />
+              <div className="modal-card__message">
+                {errors?.last_name &&
+                  `${errors?.last_name?.message || InputErrors.ERROR}`}
+              </div>
+            </div>
 
-            <label className="primary-form__label">Email</label>
 
-            <input
-              {...register('email', { required: 'enter data' })}
-              className="primary-form__input primary-form__input--margins"
-              type="email"
-              placeholder='Enter your email address'
-            />
+            <div className="primary-form__field-block--margins">
+              <label className="primary-form__label">
+                Username
+              </label>
 
-            <label className="primary-form__label">Password</label>
+              <input
+                className="primary-form__input primary-form__input--margins"
+                type="text"
+                placeholder='Enter your User name'
+                {...register('nick_name', {
+                  required: InputErrors.REQUIRED,
+                  minLength: {
+                    value: 4,
+                    message: InputErrors.MIN_LENGTH,
+                  },
+                  pattern: {
+                    value: regexpWords,
+                    message: InputErrors.PATTERN,
+                  },
+                  maxLength: {
+                    value: 30,
+                    message: InputErrors.MAX_LENGTH,
+                  },
+                })}
+              />
 
-            <input
-              {...register('email', { required: 'enter data' })}
-              className="primary-form__input primary-form__input--margins"
-              type="password"
-              placeholder='Enter your Password'
-            />
+              <div className="modal-card__message">
+                {errors?.nick_name &&
+                  `${errors?.nick_name?.message || InputErrors.ERROR}`}
+              </div>
+            </div>
+
+
+            <div className="primary-form__field-block--margins">
+
+              <label className="primary-form__label">Phone</label>
+
+              <input
+                {...register('phone_number', { required: 'enter data' })}
+                className="primary-form__input primary-form__input--margins"
+                type="phone"
+                placeholder='Enter your Phone'
+                {...register('phone_number', {
+                  required: InputErrors.REQUIRED,
+                  pattern: {
+                    value: regexpNumbers,
+                    message: InputErrors.PATTERN,
+                  },
+                  minLength: {
+                    value: 10,
+                    message: InputErrors.MIN_LENGTH_PHONE,
+                  },
+                  maxLength: {
+                    value: 30,
+                    message: InputErrors.MAX_LENGTH,
+                  },
+                })}
+              />
+
+              <div className="modal-card__message">
+                {errors?.phone_number &&
+                  `${errors?.phone_number?.message || InputErrors.ERROR}`}
+              </div>
+            </div>
+
+            <div className="primary-form__field-block--margins">
+              <label className="primary-form__label">
+                Email
+              </label>
+
+              <input
+                className="primary-form__input"
+                type="text"
+                placeholder='Enter your Email address'
+                {...register('email', {
+                  required: InputErrors.REQUIRED,
+                  pattern: {
+                    value: regexpEmail,
+                    message: InputErrors.PATTERN_EMAIL,
+                  },
+                  maxLength: {
+                    value: 30,
+                    message: InputErrors.MAX_LENGTH,
+                  },
+                })}
+              />
+              <div className="modal-card__message">
+                {errors?.email &&
+                  `${errors?.email?.message || InputErrors.ERROR}`}
+              </div>
+            </div>
+
+            <div className="primary-form__field-block--margins">
+              <label className="primary-form__label">
+                Password
+              </label>
+
+              <input
+                className="primary-form__input"
+                type="password"
+                placeholder='Enter your Password'
+                {...register('password', {
+                  required: InputErrors.REQUIRED,
+                  minLength: {
+                    value: 6,
+                    message: InputErrors.MIN_LENGTH_PASSWORD,
+                  },
+                  maxLength: {
+                    value: 15,
+                    message: InputErrors.MAX_LENGTH,
+                  },
+                })}
+              />
+
+              <div className="modal-card__message">
+                {errors?.password &&
+                  `${errors?.password?.message || InputErrors.ERROR}`}
+              </div>
+            </div>
           </div>
 
           <button type='submit' className="primary-form__button">

@@ -23,9 +23,13 @@ export const fetchCompanies = createAsyncThunk(
 export const createNewCompany = createAsyncThunk(
   'companies/createNewCompany',
   async (company: ICompany) => {
-    const { data } = await axios.post('companies', company);
+    try {
+      const { data } = await axios.post('companies', company);
 
-    return data;
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 

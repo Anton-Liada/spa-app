@@ -1,16 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FormComponent } from '../formComponent/formComponent';
+import { Notification } from '../notification';
 import './addCompanyForm.scss';
 
 export const AddCompanyForm: React.FC = () => {
+  const [isShowNotification, setIsShowNotification] = useState(false);
+
+  const handleShowNotification = () => {
+    setIsShowNotification(true);
+  };
 
   return (
-    <section className="add-section">
-      <h2 className="title title--size add-section__title">
-        Add a New Company
-      </h2>
+    <>
+      <Notification
+        message='created'
+        isShowNotification={isShowNotification}
+        setIsShowNotification={setIsShowNotification}
+      />
+      <section className="add-section">
+        <h2 className="title title--size add-section__title">
+          Add a New Company
+        </h2>
 
-      <FormComponent />
-    </section>
+        <FormComponent onClick={handleShowNotification} />
+      </section>
+    </>
   )
 }

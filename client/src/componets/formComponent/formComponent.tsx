@@ -5,10 +5,14 @@ import { useAppDispatch, useAppSelector } from '../../features/hooks/hooks';
 import { createNewCompany } from '../../features/slices/companiesSlice';
 import { ICompany } from '../../types/types';
 
-export const FormComponent: React.FC = () => {
+interface IFormComponent {
+  onClick: () => void;
+}
+
+export const FormComponent: React.FC<IFormComponent> = ({ onClick }) => {
   const dispatch = useAppDispatch();
   const profile = useAppSelector(state => state.profile.profile);
-  const company = useAppSelector(state => state.companies.selectedCompany);
+  // const company = useAppSelector(state => state.companies.selectedCompany);
   const {
     register,
     handleSubmit,
@@ -107,6 +111,7 @@ export const FormComponent: React.FC = () => {
           },
         )}
         disabled={!isValid}
+        onClick={onClick}
       >
         Save Company
       </button>

@@ -4,13 +4,14 @@ import { useAppDispatch, useAppSelector } from '../../features/hooks/hooks';
 import { ICompany } from '/src/types/types';
 import classNames from 'classnames';
 import { updateCompany } from '/src/features/slices/companiesSlice';
-import './Modal.scss';
+import './modal.scss';
 
 interface IModal {
   setIsOpenModal: (value: boolean) => void;
+  onClick: () => void;
 }
 
-export const Modal: React.FC<IModal> = ({ setIsOpenModal }) => {
+export const Modal: React.FC<IModal> = ({ setIsOpenModal, onClick }) => {
   const dispatch = useAppDispatch();
   const company = useAppSelector(state => state.companies.selectedCompany);
 
@@ -126,6 +127,7 @@ export const Modal: React.FC<IModal> = ({ setIsOpenModal }) => {
                 'disabled-btn': !isValid,
               },
             )}
+            onClick={onClick}
             disabled={!isValid}
           >
             Save Company
