@@ -1,4 +1,4 @@
-import { ConflictException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { UsersService } from 'src/users/users.service';
 import { Company } from './companies.model';
@@ -13,19 +13,11 @@ export class CompaniesService {
   ) {}
 
   async getAllCompanies() {
-    try {
-      return await this.companyRepository.findAll({ include: { all: true } });
-    } catch (error) {
-      throw new Error('something went wrong');
-    }
+    return await this.companyRepository.findAll({ include: { all: true } });
   }
 
   async getCompanyById(id: number) {
-    try {
-      return await this.companyRepository.findOne({ where: { id } });
-    } catch (error) {
-      throw new Error('something went wrong');
-    }
+    return await this.companyRepository.findOne({ where: { id } });
   }
 
   async getCompanyByName(name: string) {
@@ -36,55 +28,34 @@ export class CompaniesService {
     return company;
   }
 
-  async create(dto: CreateCompanyDto) {
+  async create(payload: CreateCompanyDto) {
     try {
-      const company = await this.getCompanyByName(dto.name);
-
-      if (company) {
-        throw new ConflictException(`${company.name} already exist`);
-      }
-
-      return await this.companyRepository.create(dto);
+      return await this.companyRepository.create(payload);
     } catch (error) {
       throw new Error(error);
     }
   }
 
-  async update(dto: CreateCompanyDto) {
-    try {
-      const company = await this.getCompanyById(dto.id);
-
-      if (!company) {
-        throw new HttpException(
-          'Company does not exist',
-          HttpStatus.BAD_REQUEST,
-        );
-      }
-
-      await company.update(dto);
-
-      return company;
-    } catch (error) {
-      throw new Error('something went wrong');
+  async update(payload: CreateCompanyDto) {
+    const company = await this.getCompanyById(payload.id);
+    if (!company) {
+      throw new HttpException('Company does not exist', HttpStatus.BAD_REQUEST);
     }
+
+    await company.update(payload);
+
+    return company;
   }
 
   async delete(id: number) {
-    try {
-      const company = await this.getCompanyById(id);
+    const company = await this.getCompanyById(id);
 
-      if (!company) {
-        throw new HttpException(
-          'Company does not exist',
-          HttpStatus.BAD_REQUEST,
-        );
-      }
-
-      const deleteCompany = await company.destroy();
-
-      return deleteCompany;
-    } catch (error) {
-      throw new Error('something went wrong');
+    if (!company) {
+      throw new HttpException('Company does not exist', HttpStatus.BAD_REQUEST);
     }
+
+    const deleteCompany = await company.destroy();
+
+    return deleteCompany;
   }
 }

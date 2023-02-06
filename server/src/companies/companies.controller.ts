@@ -28,13 +28,13 @@ export class CompaniesController {
   }
 
   @Post()
-  async createCompany(@Body() dto: CreateCompanyDto) {
-    return await this.companiesService.create(dto);
+  async createCompany(@Body() payload: CreateCompanyDto) {
+    return await this.companiesService.create(payload);
   }
 
   @Put()
-  async update(@Body() dto: CreateCompanyDto) {
-    return await this.companiesService.update(dto);
+  async update(@Body() payload: CreateCompanyDto) {
+    return await this.companiesService.update(payload);
   }
 
   @Delete('/:id')

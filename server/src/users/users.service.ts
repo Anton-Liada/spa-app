@@ -12,8 +12,8 @@ export class UsersService {
     private roleService: RolesService,
   ) {}
 
-  async createUser(dto: CreateUserDto) {
-    const user = await this.userRepository.create(dto);
+  async createUser(payload: CreateUserDto) {
+    const user = await this.userRepository.create(payload);
     const role = await this.roleService.getRoleByPosition('ADMIN');
     await user.$set('roles', [role.id]);
     user.roles = [role];
@@ -34,14 +34,14 @@ export class UsersService {
     return user;
   }
 
-  async addRole(dto: AddRoleDto) {
-    const user = await this.userRepository.findByPk(dto.userId);
-    const role = await this.roleService.getRoleByPosition(dto.position);
+  async addRole(payload: AddRoleDto) {
+    const user = await this.userRepository.findByPk(payload.userId);
+    const role = await this.roleService.getRoleByPosition(payload.position);
 
     if (role && user) {
       await user.$add('role', role.id);
 
-      return dto;
+      return payload;
     }
 
     throw new HttpException(

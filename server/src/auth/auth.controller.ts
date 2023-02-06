@@ -31,9 +31,10 @@ export class AuthController {
     return await this.authService.registration(userDto);
   }
 
-  @Get('/logout')
-  logout(@Request() req): any {
-    req.session.destroy();
-    return { message: 'The user session has ended' };
-  }
+  // @Get('/logout')
+  // logout(@Request() req): any {
+  //   console.log(req)
+  //   req.session.destroy();
+  //   return { message: 'The user session has ended' };
+  // }
 }

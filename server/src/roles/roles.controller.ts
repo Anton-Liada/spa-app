@@ -7,8 +7,8 @@ export class RolesController {
   constructor(private roleService: RolesService) {}
 
   @Post()
-  create(@Body() dto: CreateRoleDto) {
-    return this.roleService.createRole(dto);
+  create(@Body() payload: CreateRoleDto) {
+    return this.roleService.createRole(payload);
   }
 
   @Get('/:position')

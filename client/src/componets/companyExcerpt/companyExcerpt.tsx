@@ -12,6 +12,7 @@ let CompanyExcerpt: React.FC<IProps> = ({ company }) => {
     id,
     name,
     serviceOfActivity,
+    author,
   } = company;
 
   return (
@@ -19,6 +20,10 @@ let CompanyExcerpt: React.FC<IProps> = ({ company }) => {
       <h4 className="card__title">
         {name}
       </h4>
+
+      <p className="card__author">
+        {`Created by ${author.last_name} ${author.first_name}`}
+      </p>
 
       <p className="card__description">
         {serviceOfActivity}
