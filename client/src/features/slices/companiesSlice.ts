@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from '../../axios';
 import { Status } from '/src/types/enums';
 import { ICompany, ICompaniesState } from '/src/types/types';
-import { setError, setStatus } from '/src/utils/utils';
+import { setError, setStatus, updatedCompany } from '/src/utils/utils';
 
 const initialState: ICompaniesState = {
   companies: [],
@@ -23,7 +23,6 @@ export const fetchCompanies = createAsyncThunk(
 export const createNewCompany = createAsyncThunk(
   'companies/createNewCompany',
   async (company: ICompany) => {
-    console.log(company)
     const { data } = await axios.post('companies', company);
 
     return data;
@@ -86,22 +85,16 @@ const companiesSlice = createSlice({
       .addCase(updateCompany.pending, setStatus)
       .addCase(updateCompany.fulfilled, (state, action: PayloadAction<ICompany>) => {
         state.status = Status.SUCCEEDED;
-        const {
-          id,
-          name,
-          address,
-          serviceOfActivity,
-          numberOfEmployees,
-          type,
-        } = action.payload;
-        const existingCompany = state.companies.find(company => company.id === id);
+        const existingCompany = state.companies.find((company) => {
+          return company.id === action.payload.id;
+        });
 
         if (existingCompany) {
-          existingCompany.name = name;
-          existingCompany.serviceOfActivity = serviceOfActivity;
-          existingCompany.numberOfEmployees = numberOfEmployees;
-          existingCompany.address = address;
-          existingCompany.type = type;
+          updatedCompany(existingCompany, action.payload);
+        }
+
+        if (state.selectedCompany) {
+          updatedCompany(state.selectedCompany, action.payload);
         }
       })
       .addCase(updateCompany.rejected, setError);

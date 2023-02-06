@@ -7,9 +7,14 @@ export interface IUser {
   last_name: string;
   first_name: string;
   nick_name: string;
-  roles?: string[];
+  roles?: IRoles[];
   companies?: ICompany[];
   password?: string;
+}
+
+export interface IRoles {
+  position: string;
+  description: string;
 }
 
 export interface ICompany {
@@ -40,6 +45,12 @@ export interface IUsersState {
   users: IUser[];
   status: Status;
   error: null | string;
+}
+
+export interface IProfileState {
+  profile: IUser | null,
+  status: Status,
+  error: null,
 }
 
 export interface ISelectedPage {

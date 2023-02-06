@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authSlice from '../slices/authSlice';
 import copmpaniesSlice from '../slices/companiesSlice';
+import profileSlice from '../slices/profileSlice';
 import usersSlice from '../slices/usersSlice';
 
 export const store = configureStore({
@@ -8,6 +9,7 @@ export const store = configureStore({
     companies: copmpaniesSlice,
     auth: authSlice,
     users: usersSlice,
+    profile: profileSlice,
   },
 });
 

@@ -1,0 +1,37 @@
+@import '../../styles/utils';
+
+.profile-section {}
+
+.profile-block {
+  display: flex;
+  height: 200px;
+  width: 800px;
+  margin: 50px 0;
+  border: 1px solid $color-purple;
+  border-radius: 5px;
+  box-shadow: $shadow;
+
+  &__img-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 150px;
+    border-right: 1px solid $color-purple;
+  }
+
+  &__img {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+  }
+}
+
+.info-list {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+  padding: 15px 40px;
+  font-weight: $fw-600;
+}

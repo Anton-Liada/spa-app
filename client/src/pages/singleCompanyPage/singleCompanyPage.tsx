@@ -1,40 +1,23 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../features/hooks/hooks';
 import { deleteCompany, fetchOneCompany } from '../../features/slices/companiesSlice';
 import './singleCompanyPage.scss';
-import { Status } from '/src/types/enums';
+import { Modal } from '/src/componets/Modal';
+import { ICompany } from '/src/types/types';
 
 export const SingleCompanyPage: React.FC = () => {
+  const [isOpenModal, setIsOpenModal] = useState(false)
   const nav = useNavigate();
   const { id = null } = useParams();
   const dispatch = useAppDispatch();
-  const userEmail = useAppSelector(state => state.auth.email);
-  const currentUser = useAppSelector(state => state.users.users.find(user => user.email === userEmail));
+  const company = useAppSelector((state) =>
+    state.companies.selectedCompany);
+  const profile = useAppSelector(state => state.profile.profile);
 
   useEffect(() => {
     dispatch(fetchOneCompany(Number(id)));
-
   }, [dispatch]);
-
-  const company = useAppSelector(state => state.companies.selectedCompany);
-
-  if (!company) {
-    return (
-      <section className="company-section">
-        <h3 className="title">Company not found!</h3>
-      </section>
-    )
-  }
-
-  const isMyCompany = company.userId === currentUser?.id;
-
-  const {
-    name,
-    serviceOfActivity,
-    numberOfEmployees,
-    type,
-    address } = company;
 
   const handleDeleteCompany = () => {
     try {
@@ -46,45 +29,58 @@ export const SingleCompanyPage: React.FC = () => {
     nav('/');
   };
 
+  const isMyCompany = profile?.id === company?.userId;
+
+  const handleOpenModal = () => {
+    setIsOpenModal(true);
+  }
+
   return (
-    <section className="company-section container-small">
-      <div className="card company-section__card">
-        <h3 className="card__title card__title--size">
-          {name}
-        </h3>
+    <>
+      {isOpenModal && <Modal setIsOpenModal={setIsOpenModal} />}
 
-        <p className="card__description">
-          {serviceOfActivity}
-        </p>
+      <section className="company-section container-small">
+        <div className="card company-section__card">
+          <h3 className="card__title card__title--size">
+            {company?.name}
+          </h3>
 
-        <p className="card__description">
-          {`Type:  ${type}`}
-        </p>
+          <p className="card__description">
+            {company?.serviceOfActivity}
+          </p>
 
-        <p className="card__description">
-          {`Number of employess:  ${numberOfEmployees}`}
-        </p>
+          <p>
+            <span className="card__span">Address:</span>
+            {` ${company?.address}`}
+          </p>
+            
+          <p>
+            <span className="card__span">Type:</span>
+            {` ${company?.type}`}
+          </p>
 
-        <p className="card__description">
-          {`Address:  ${address}`}
-        </p>
+          <p>
+            <span className="card__span">Number of Employees:</span>
+            {` ${company?.numberOfEmployees}`}
+          </p>
 
-        {isMyCompany &&
-          <div className="card__buttons-wrapper">
-            <button className="card__button">
-              update
-            </button>
+          {isMyCompany &&
+            <div className="card__buttons-wrapper">
+              <button className="card__button" onClick={handleOpenModal}>
+                update
+              </button>
 
-            <button className="card__button" onClick={handleDeleteCompany}>
-              delete
-            </button>
-          </div>
-        }
-      </div>
+              <button className="card__button" onClick={handleDeleteCompany}>
+                delete
+              </button>
+            </div>
+          }
+        </div>
 
-      <Link to={`/`} className="card__link">
-        Back to Home page
-      </Link>
-    </section>
+        <Link to={`/companies`} className="card__link">
+          Back to Companies page
+        </Link>
+      </section>
+    </>
   )
 }

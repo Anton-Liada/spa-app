@@ -1,44 +1,56 @@
-import React, { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../features/hooks/hooks';
-import { fetchCompanies } from '../../features/slices/companiesSlice';
-import { Status } from '../../types/enums';
+import React, { useCallback, useState } from 'react';
 import CompanyExcerpt from '../companyExcerpt/companyExcerpt';
-import { Loader } from '../loader';
+import { Filter } from '../filter';
+import { ICompany } from '/src/types/types';
+import { filteredCompaniesByTitle } from '/src/utils/utils';
 import './companiesList.scss';
 
-export const CompaniesList: React.FC = () => {
-  const dispatch = useAppDispatch();
-  const fetchRequestStatus = useAppSelector(state => state.companies.status);
-  const errorMessage = useAppSelector(state => state.companies.error);
+interface ICompaniesList {
+  companies?: ICompany[];
+  title: string;
+}
 
-  useEffect(() => {
-    if (fetchRequestStatus === Status.IDLE) {
-      dispatch(fetchCompanies());
-    }
+export const CompaniesList: React.FC<ICompaniesList> = ({ companies, title }) => {
+  const [value, setValue] = useState('');
 
-  }, [fetchRequestStatus, dispatch]);
+  if (!companies) {
+    return (
+      <h2 className="title title--position">
+        No companies are here... yet.
+      </h2>
+    )
+  }
 
-  const companies = useAppSelector(state => state.companies.companies);
+  const onChangeInput = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setValue(event.target.value.trimStart());
+    }, []);
 
-  const content = companies.map(company => (
+  let filteredCompanies: ICompany[];
+
+  (value)
+    ? (filteredCompanies = filteredCompaniesByTitle(companies, value))
+    : (filteredCompanies = companies);
+
+  const content = filteredCompanies.map(company => (
     <CompanyExcerpt key={company.id} company={company} />
   ));
 
   return (
-    <>
-      {(fetchRequestStatus === Status.LOADING) && (<Loader />)}
+    <section className="companies-section container">
+      <h2 className="title title--size add-section__title">
+        {title}
+      </h2>
 
-      {(fetchRequestStatus === Status.FAILED) && (<p>{errorMessage}</p>)}
+      <Filter
+        amountOfCompanies={filteredCompanies.length}
+        onChange={onChangeInput}
+        value={value}
+      />
 
-      {(fetchRequestStatus === Status.SUCCEEDED) && (
-        <section className="companies-section">
-          <h2 className="title title--size add-section__title">
-            Companies
-          </h2>
-
-          {content}
-        </section>
-      )}
-    </>
+      <div className="card-list">
+        {content}
+      </div>
+    </section>
   )
 }

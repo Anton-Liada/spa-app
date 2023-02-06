@@ -31,7 +31,7 @@ export const Header: React.FC = () => {
   
               <HeaderLink
                 content='Companies'
-                to='/Companies'
+                to='/companies'
                 style='nav__link'
               />
 

@@ -28,6 +28,7 @@ export const RegisterPage: React.FC = () => {
   });
 
   const onSubmit = async (values: IUser) => {
+    console.log('values',values)
     try {
       const data = await dispatch(fetchRegister(values));
       if (!data.payload) {

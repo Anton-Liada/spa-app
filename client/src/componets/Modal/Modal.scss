@@ -1,0 +1,67 @@
+@import '../../styles/utils';
+
+.modal-card {
+  border-radius: 10px;
+
+  &__label {
+    width: 600px;
+    margin-right: 10px;
+    font-size: $fs-12;
+    font-weight: $fw-600;
+  }
+
+  &__input {
+    display: block;
+    width: 300px;
+    height: 30px;
+    padding-left: 10px;
+    border: 1px solid $color-white-2;
+    border-radius: 3px;
+    transition: border-color 0.3s;
+    outline: none;
+    @include hover(border-color, $color-light-blue);
+  }
+
+  &__message {
+    height: 15px;
+    font-size: $fs-10;
+    font-weight: $fw-600;
+    color: $color-red;
+  }
+
+  &__select {
+    border-radius: 4px;
+    font-size: $fs-12;
+    background-color: $color-slate-grey;
+    color: $color-white;
+    font-weight: $fw-600;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    @include hover(box-shadow, $shadow-1);
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.modal-card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-card-title {
+  font-size: $fs-24;
+  font-weight: $fw-700;
+}
+
+.danger {
+  border: 1px solid $color-red-1;
+}
+
+.success {
+  border: 1px solid $color-green;
+}
