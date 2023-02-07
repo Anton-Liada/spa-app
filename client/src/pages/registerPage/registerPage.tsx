@@ -2,12 +2,12 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { AuthComponent } from '../../componets/authComponent';
-import './registerPage.scss';
 import { useAppDispatch, useAppSelector } from '/src/features/hooks/hooks';
 import { fetchRegister, selectIsLogin } from '/src/features/slices/authSlice';
 import { InputErrors } from '/src/types/enums';
 import { IUser } from '/src/types/types';
 import { regexpEmail, regexpNumbers, regexpWords } from '/src/utils/regexp';
+import './registerPage.scss';
 
 export const RegisterPage: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -35,7 +35,6 @@ export const RegisterPage: React.FC = () => {
   });
 
   const onSubmit = async (values: IUser) => {
-    console.log('values', values);
     try {
       const data = await dispatch(fetchRegister(values));
       if (!data.payload) {
@@ -48,7 +47,7 @@ export const RegisterPage: React.FC = () => {
 
       nav('/');
     } catch (error) {
-      throw new Error('something went wrong');
+      return <h3 className='title'>такой пользователь уже существует</h3>;
     }
   };
 

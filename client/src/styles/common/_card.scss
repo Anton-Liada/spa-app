@@ -9,13 +9,22 @@
   border-radius: 5px;
   box-shadow: $shadow;
 
-  &__title {
+  &__header {
     min-height: 80px;
+    margin-bottom: 20px;
+  }
+
+  &__title {
     font-size: $fs-20;
 
     &--size {
       font-size: $fs-30;
     }
+  }
+
+  &__author {
+    font-size: $fs-14;
+    color: $color-grey;
   }
 
   &__description {
