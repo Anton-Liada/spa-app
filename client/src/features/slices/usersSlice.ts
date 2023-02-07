@@ -2,7 +2,8 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from '../../axios';
 import { Status } from '../../types/enums';
 import { IUser, IUsersState } from '../../types/types';
-import { setError, setStatus } from '../../utils/utils';
+import { setError } from '/src/utils/setError';
+import { setStatus } from '/src/utils/setStatus';
 
 export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
   const { data } = await axios.get('users');

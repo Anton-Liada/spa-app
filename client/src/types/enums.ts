@@ -15,3 +15,7 @@ export enum InputErrors {
   ERROR = 'Something went wrong',
   REQUIRED = 'Please, enter a value',
 }
+
+export enum ErrorMessage {
+  ERROR = 'something went wrong',
+}

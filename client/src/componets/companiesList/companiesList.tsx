@@ -5,7 +5,7 @@ import { Filter } from '../filter';
 import { useAppSelector } from '../../features/hooks/hooks';
 import { Status } from '../../types/enums';
 import { ICompany } from '../../types/types';
-import { filteredCompaniesByTitle } from '../../utils/utils';
+import { filteredCompaniesByKeyWords } from '/src/utils/filteredCompaniesByKeyWords';
 import './companiesList.scss';
 
 interface ICompaniesList {
@@ -44,7 +44,7 @@ export const CompaniesList: React.FC<ICompaniesList> = ({
   let filteredCompanies: ICompany[];
 
   value
-    ? (filteredCompanies = filteredCompaniesByTitle(companies, value))
+    ? (filteredCompanies = filteredCompaniesByKeyWords(companies, value))
     : (filteredCompanies = companies);
 
   let content;

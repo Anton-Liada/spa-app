@@ -101,7 +101,6 @@ export const FormComponent: React.FC<IFormComponent> = ({ onClick }) => {
         type="text"
         placeholder="Enter address"
         className="secondary-form__input"
-        {...register('address', { required: 'Enter address' })}
         {...register('address', {
           required: InputErrors.REQUIRED,
           minLength: {

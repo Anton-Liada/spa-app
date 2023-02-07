@@ -2,7 +2,9 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from '../../axios';
 import { Status } from '../../types/enums';
 import { ICompaniesState, ICompany } from '../../types/types';
-import { setError, setStatus, updatedCompany } from '../../utils/utils';
+import { setError } from '/src/utils/setError';
+import { setStatus } from '/src/utils/setStatus';
+import { updatedCompany } from '/src/utils/updatedCompany';
 
 const initialState: ICompaniesState = {
   companies: [],

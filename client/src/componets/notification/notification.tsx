@@ -37,8 +37,7 @@ export const Notification: React.FC<INotification> = ({
         aria-label="HideErrorButton"
         onClick={handleHideNotification}
       />
-
-      {`Your company has been successfully ${message}.`}
+      {message}
     </div>
   );
 };

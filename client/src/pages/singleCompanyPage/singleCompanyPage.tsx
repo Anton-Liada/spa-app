@@ -49,7 +49,7 @@ export const SingleCompanyPage: React.FC = () => {
   return (
     <div className="update-page">
       <Notification
-        message="updated"
+        message="Your company has been successfully updated."
         isShowNotification={isShowNotification}
         setIsShowNotification={setIsShowNotification}
       />
@@ -63,7 +63,9 @@ export const SingleCompanyPage: React.FC = () => {
 
       <section className="company-section container-small">
         <div className="card company-section__card">
-          <h3 className="card__title card__title--size">{company?.name}</h3>
+          <h3 className="card__title card__title--size">
+            {company?.name}
+          </h3>
 
           <p className="card__description">{company?.serviceOfActivity}</p>
 

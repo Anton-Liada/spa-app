@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import './profilePage.scss';
 import { CompaniesList } from '/src/componets/companiesList';
 import { useAppSelector } from '/src/features/hooks/hooks';
@@ -19,7 +20,7 @@ export const ProfilePage: React.FC = () => {
             <img
               src="https://api.realworld.io/images/smiley-cyrus.jpeg"
               alt=""
-              className="profile-block__img"
+              className="profile-img"
             />
           </div>
 
@@ -35,10 +36,26 @@ export const ProfilePage: React.FC = () => {
                 {`Last name: ${profile?.last_name}`}
               </li>
 
-              <li className="info-list__item">{`Email: ${profile?.email}`}</li>
+              <li className="info-list__item">
+                {`Email: ${profile?.email}`}
+              </li>
+
+              
+              <li className="info-list__item">
+                {`Phone number: ${profile?.phone_number}`}
+              </li>
 
               <li className="info-list__item">
                 {`Role: ${profile?.roles?.map(role => role.position)}`}
+              </li>
+
+              <li className="info-list__item--position">
+                <Link
+                  className="info-list__link"
+                  to='/settings'
+                >
+                  Edit profile settings
+                </Link>
               </li>
             </ul>
           </div>

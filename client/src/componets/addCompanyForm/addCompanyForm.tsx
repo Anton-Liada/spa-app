@@ -13,7 +13,7 @@ export const AddCompanyForm: React.FC = () => {
   return (
     <>
       <Notification
-        message="created"
+        message="Your company has been successfully created."
         isShowNotification={isShowNotification}
         setIsShowNotification={setIsShowNotification}
       />
