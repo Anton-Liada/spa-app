@@ -2,8 +2,6 @@
 I use free hosting, please wait until the data is downloaded :)
 Web application with possibility of user authorization and management of own companies.
 
-**--Here is [DEMO LINK](https://Anton-Liada.github.io/spa-app/)**
-
 ## Setup
 
 Make sure to install the dependencies:
