@@ -50,8 +50,8 @@ const authSlice = createSlice({
         state.status = Status.SUCCEEDED;
         state.email = action.payload;
       })
-      .addCase(fetchLogin.rejected, (state) => {
-        return setError(state, EMessages.LOGIN_ERROR_MSG)
+      .addCase(fetchLogin.rejected, state => {
+        return setError(state, EMessages.LOGIN_ERROR_MSG);
       });
 
     builder
@@ -60,8 +60,8 @@ const authSlice = createSlice({
         state.status = Status.SUCCEEDED;
         state.email = action.payload;
       })
-      .addCase(fetchAuth.rejected, (state) => {
-        return setError(state, EMessages.ERROR)
+      .addCase(fetchAuth.rejected, state => {
+        return setError(state, EMessages.ERROR);
       });
 
     builder
@@ -73,8 +73,8 @@ const authSlice = createSlice({
           state.email = action.payload;
         },
       )
-      .addCase(fetchRegister.rejected, (state) => {
-        return setError(state, EMessages.REGISTER_ERROR_MSG)
+      .addCase(fetchRegister.rejected, state => {
+        return setError(state, EMessages.REGISTER_ERROR_MSG);
       });
   },
 });

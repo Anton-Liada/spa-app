@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { FormComponent } from '../formComponent/formComponent';
 import { Notification } from '../notification';
-import { EMessages } from '/src/types/enums';
 import './addCompanyForm.scss';
+import { EMessages } from '/src/types/enums';
 
 export const AddCompanyForm: React.FC = () => {
   const [isShowNotification, setIsShowNotification] = useState(false);

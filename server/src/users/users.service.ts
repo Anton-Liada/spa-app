@@ -12,15 +12,6 @@ export class UsersService {
     private roleService: RolesService,
   ) {}
 
-  async createUser(payload: CreateUserDto) {
-    const user = await this.userRepository.create(payload);
-    const role = await this.roleService.getRoleByPosition('USER');
-    await user.$set('roles', [role.id]);
-    user.roles = [role];
-
-    return user;
-  }
-
   async getAllUsers() {
     return await this.userRepository.findAll({ include: { all: true } });
   }
@@ -34,6 +25,39 @@ export class UsersService {
     return user;
   }
 
+  async create(payload: CreateUserDto) {
+    const user = await this.userRepository.create(payload);
+    const role = await this.roleService.getRoleByPosition('USER');
+    await user.$set('roles', [role.id]);
+    user.roles = [role];
+
+    return user;
+  }
+
+  async update(payload: CreateUserDto) {
+    const existingUser = await this.userRepository.findByPk(payload.id);
+
+    if (!existingUser) {
+      throw new HttpException('User does not exist', HttpStatus.BAD_REQUEST);
+    }
+
+    await existingUser.update(payload);
+
+    return existingUser;
+  }
+
+  async delete(id: number) {
+    const existingUser = await this.userRepository.findByPk(id);
+
+    if (!existingUser) {
+      throw new HttpException('User does not exist', HttpStatus.BAD_REQUEST);
+    }
+
+    const deleteUser = await existingUser.destroy();
+
+    return deleteUser;
+  }
+
   async addRole(payload: AddRoleDto) {
     const user = await this.userRepository.findByPk(payload.userId);
     const role = await this.roleService.getRoleByPosition(payload.position);
@@ -44,9 +68,6 @@ export class UsersService {
       return payload;
     }
 
-    throw new HttpException(
-      'Пользователь или роль не найдены',
-      HttpStatus.NOT_FOUND,
-    );
+    throw new HttpException('User or role not found', HttpStatus.NOT_FOUND);
   }
 }

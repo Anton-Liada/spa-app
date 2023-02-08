@@ -1,12 +1,12 @@
 import React, { useCallback, useState } from 'react';
 import ReactPaginate from 'react-paginate';
-import CompanyExcerpt from '../companyExcerpt/companyExcerpt';
-import { Filter } from '../filter';
 import { useAppSelector } from '../../features/hooks/hooks';
 import { Status } from '../../types/enums';
 import { ICompany } from '../../types/types';
-import { filteredCompaniesByKeyWords } from '/src/utils/filteredCompaniesByKeyWords';
+import CompanyExcerpt from '../companyExcerpt/companyExcerpt';
+import { Filter } from '../filter';
 import './companiesList.scss';
+import { filteredCompaniesByKeyWords } from '/src/utils/filteredCompaniesByKeyWords';
 
 interface ICompaniesList {
   companies?: ICompany[];

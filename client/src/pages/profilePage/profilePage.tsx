@@ -36,11 +36,8 @@ export const ProfilePage: React.FC = () => {
                 {`Last name: ${profile?.last_name}`}
               </li>
 
-              <li className="info-list__item">
-                {`Email: ${profile?.email}`}
-              </li>
+              <li className="info-list__item">{`Email: ${profile?.email}`}</li>
 
-              
               <li className="info-list__item">
                 {`Phone number: ${profile?.phone_number}`}
               </li>
@@ -50,10 +47,7 @@ export const ProfilePage: React.FC = () => {
               </li>
 
               <li className="info-list__item--position">
-                <Link
-                  className="info-list__link"
-                  to='/settings'
-                >
+                <Link className="info-list__link" to="/settings">
                   Edit profile settings
                 </Link>
               </li>

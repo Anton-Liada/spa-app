@@ -1,7 +1,7 @@
 import React from 'react';
-import { HeaderLink } from '../headerLink';
 import { useAppDispatch } from '../../features/hooks/hooks';
 import { logout } from '../../features/slices/authSlice';
+import { HeaderLink } from '../headerLink';
 import './header.scss';
 
 export const Header: React.FC = () => {
@@ -20,11 +20,7 @@ export const Header: React.FC = () => {
 
           <div className="nav__content">
             <div className="nav__list">
-              <HeaderLink
-                content="Home"
-                to="/"
-                style="nav__link"
-              />
+              <HeaderLink content="Home" to="/" style="nav__link" />
 
               <HeaderLink
                 content="Companies"
@@ -32,11 +28,7 @@ export const Header: React.FC = () => {
                 style="nav__link"
               />
 
-              <HeaderLink
-                content="Profile"
-                to="/profile"
-                style="nav__link"
-              />
+              <HeaderLink content="Profile" to="/profile" style="nav__link" />
 
               <HeaderLink
                 content="Logout"

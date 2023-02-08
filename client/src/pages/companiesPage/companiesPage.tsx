@@ -12,15 +12,15 @@ export const CompaniesPage: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetchCompanies());
-  }, [dispatch])
+  }, [dispatch]);
 
   return (
     <>
       {fetchRequestStatus === Status.LOADING && <Loader />}
 
-      {fetchRequestStatus === Status.SUCCEEDED &&
+      {fetchRequestStatus === Status.SUCCEEDED && (
         <CompaniesList companies={companies} title="Companies" />
-      }
+      )}
     </>
-  )
+  );
 };

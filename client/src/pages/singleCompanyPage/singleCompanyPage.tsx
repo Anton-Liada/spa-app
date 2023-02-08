@@ -6,8 +6,8 @@ import {
   deleteCompany,
   fetchOneCompany,
 } from '../../features/slices/companiesSlice';
-import { Notification } from '/src/componets/notification';
 import './singleCompanyPage.scss';
+import { Notification } from '/src/componets/notification';
 import { EMessages } from '/src/types/enums';
 
 export const SingleCompanyPage: React.FC = () => {
@@ -64,9 +64,7 @@ export const SingleCompanyPage: React.FC = () => {
 
       <section className="company-section container-small">
         <div className="card company-section__card">
-          <h3 className="card__title card__title--size">
-            {company?.name}
-          </h3>
+          <h3 className="card__title card__title--size">{company?.name}</h3>
 
           <p className="card__description">
             <span className="card__span">Service of ativity</span>

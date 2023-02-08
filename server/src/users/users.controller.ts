@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { RolesAuthGuard } from '../auth/guards/roles-auth.guard';
 import { Roles } from '../auth/roles-auth.decorator';
@@ -12,19 +21,35 @@ export class UsersController {
   constructor(private userService: UsersService) {}
 
   @Post()
-  create(@Body() userDto: CreateUserDto) {
-    return this.userService.createUser(userDto);
+  async create(@Body() payload: CreateUserDto) {
+    return await this.userService.create(payload);
   }
 
+  @Roles('ADMIN')
+  @UseGuards(RolesAuthGuard)
   @Get()
-  getAll() {
-    return this.userService.getAllUsers();
+  async getAll() {
+    return await this.userService.getAllUsers();
   }
 
   @Roles('ADMIN')
   @UseGuards(RolesAuthGuard)
   @Post('/role')
-  addRole(@Body() payload: AddRoleDto) {
-    return this.userService.addRole(payload);
+  async addRole(@Body() payload: AddRoleDto) {
+    return await this.userService.addRole(payload);
+  }
+
+  @Roles('ADMIN')
+  @UseGuards(RolesAuthGuard)
+  @Put()
+  async update(@Body() payload: CreateUserDto) {
+    return await this.userService.update(payload);
+  }
+
+  @Roles('ADMIN')
+  @UseGuards(RolesAuthGuard)
+  @Delete('/:id')
+  async delete(@Param('id') id: string) {
+    return await this.userService.delete(Number(id));
   }
 }

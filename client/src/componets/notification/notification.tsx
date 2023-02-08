@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React, { useEffect } from 'react';
-import { EMessages } from '/src/types/enums';
 import './notification.scss';
+import { EMessages } from '/src/types/enums';
 
 interface INotification {
   message: EMessages | null;

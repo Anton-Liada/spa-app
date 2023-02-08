@@ -43,8 +43,8 @@ const profileSlice = createSlice({
           state.profile = action.payload;
         },
       )
-      .addCase(fetchProfile.rejected, (state) => {
-        setError(state, EMessages.ERROR)
+      .addCase(fetchProfile.rejected, state => {
+        setError(state, EMessages.ERROR);
       });
 
     builder
@@ -54,12 +54,12 @@ const profileSlice = createSlice({
         (state, action: PayloadAction<IUser>) => {
           if (state.profile) {
             state.status = Status.SUCCEEDED;
-            state.profile = Object.assign(state.profile, action.payload)
+            state.profile = Object.assign(state.profile, action.payload);
           }
         },
       )
-      .addCase(updateProfile.rejected, (state) => {
-        setError(state, EMessages.ERROR)
+      .addCase(updateProfile.rejected, state => {
+        setError(state, EMessages.ERROR);
       });
   },
 });

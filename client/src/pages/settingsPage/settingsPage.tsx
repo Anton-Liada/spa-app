@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import './settingsPage.scss';
 import { Notification } from '/src/componets/notification';
@@ -30,9 +30,7 @@ export const SettingsPage: React.FC = () => {
   });
 
   if (!profile) {
-    return <h3 className="title title--position">
-      Profile not found
-    </h3>
+    return <h3 className="title title--position">Profile not found</h3>;
   }
 
   const onSubmit = async (user: IUser) => {
@@ -51,9 +49,7 @@ export const SettingsPage: React.FC = () => {
         setIsShowNotification={setIsShowNotification}
       />
 
-      <h3 className="title">
-        Your Settings
-      </h3>
+      <h3 className="title">Your Settings</h3>
 
       <div className="img-wrapper">
         <img
@@ -63,9 +59,7 @@ export const SettingsPage: React.FC = () => {
         />
       </div>
 
-      <form className="secondary-form"
-        onSubmit={handleSubmit(onSubmit)}
-      >
+      <form className="secondary-form" onSubmit={handleSubmit(onSubmit)}>
         <div className="secondary-form__wrapper">
           <div className="secondary-form__input-wrapper">
             <label className="secondary-form__label">First name:</label>
@@ -198,8 +192,7 @@ export const SettingsPage: React.FC = () => {
         />
 
         <div className="secondary-form__message">
-          {errors?.email &&
-            `${errors?.email?.message || InputErrors.ERROR}`}
+          {errors?.email && `${errors?.email?.message || InputErrors.ERROR}`}
         </div>
 
         <button
@@ -214,5 +207,5 @@ export const SettingsPage: React.FC = () => {
         </button>
       </form>
     </section>
-  )
-}
+  );
+};

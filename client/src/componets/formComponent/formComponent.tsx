@@ -42,7 +42,7 @@ export const FormComponent: React.FC = () => {
       );
     }
 
-    if (data && ('error' in data)) {
+    if (data && 'error' in data) {
       setIsShowNotification(true);
       setIsErrorMessage(true);
     } else {
@@ -57,7 +57,6 @@ export const FormComponent: React.FC = () => {
       <form className="secondary-form" onSubmit={handleSubmit(onSubmit)}>
         <div className="secondary-form__wrapper">
           <div className="secondary-form__input-wrapper">
-
             <label className="secondary-form__label">Company Title:</label>
 
             <input
@@ -82,13 +81,14 @@ export const FormComponent: React.FC = () => {
             />
 
             <div className="secondary-form__message">
-              {errors?.name &&
-                `${errors?.name?.message || InputErrors.ERROR}`}
+              {errors?.name && `${errors?.name?.message || InputErrors.ERROR}`}
             </div>
           </div>
 
           <div className="secondary-form__input-wrapper--size">
-            <label className="secondary-form__label">Number of employees:</label>
+            <label className="secondary-form__label">
+              Number of employees:
+            </label>
 
             <input
               type="number"
@@ -157,8 +157,7 @@ export const FormComponent: React.FC = () => {
         />
 
         <div className="secondary-form__message">
-          {errors?.type &&
-            `${errors?.type?.message || InputErrors.ERROR}`}
+          {errors?.type && `${errors?.type?.message || InputErrors.ERROR}`}
         </div>
 
         <label className="secondary-form__label">Service of activity:</label>

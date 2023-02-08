@@ -28,7 +28,7 @@ export const createNewCompany = createAsyncThunk(
     const { data } = await axios.post('companies', company);
 
     return data;
-  }
+  },
 );
 
 export const updateCompany = createAsyncThunk(
@@ -72,7 +72,7 @@ const companiesSlice = createSlice({
           state.companies = action.payload.map(company => company);
         },
       )
-      .addCase(fetchCompanies.rejected, (state) => {
+      .addCase(fetchCompanies.rejected, state => {
         return setError(state, EMessages.ERROR);
       });
 
@@ -86,7 +86,7 @@ const companiesSlice = createSlice({
           state.companies.push({ ...action.payload });
         },
       )
-      .addCase(createNewCompany.rejected, (state) => {
+      .addCase(createNewCompany.rejected, state => {
         return setError(state, EMessages.ERROR_COMPANY_MSG);
       });
 
@@ -109,8 +109,8 @@ const companiesSlice = createSlice({
           }
         },
       )
-      .addCase(updateCompany.rejected, (state) => {
-        return setError(state, EMessages.ERROR_COMPANY_MSG)
+      .addCase(updateCompany.rejected, state => {
+        return setError(state, EMessages.ERROR_COMPANY_MSG);
       });
 
     builder
@@ -123,8 +123,8 @@ const companiesSlice = createSlice({
           );
         },
       )
-      .addCase(deleteCompany.rejected, (state) => {
-        return setError(state, EMessages.ERROR)
+      .addCase(deleteCompany.rejected, state => {
+        return setError(state, EMessages.ERROR);
       });
 
     builder
@@ -136,8 +136,8 @@ const companiesSlice = createSlice({
           state.selectedCompany = action.payload;
         },
       )
-      .addCase(fetchOneCompany.rejected, (state) => {
-        return setError(state, EMessages.ERROR)
+      .addCase(fetchOneCompany.rejected, state => {
+        return setError(state, EMessages.ERROR);
       });
   },
 });

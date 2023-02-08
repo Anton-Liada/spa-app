@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { AuthComponent } from '../../componets/authComponent';
+import './registerPage.scss';
+import { Notification } from '/src/componets/notification';
 import { useAppDispatch } from '/src/features/hooks/hooks';
 import { fetchRegister } from '/src/features/slices/authSlice';
 import { EMessages, InputErrors } from '/src/types/enums';
 import { IUser } from '/src/types/types';
 import { regexpEmail, regexpNumbers, regexpWords } from '/src/utils/regexp';
-import './registerPage.scss';
-import { Notification } from '/src/componets/notification';
 
 export const RegisterPage: React.FC = () => {
   const dispatch = useAppDispatch();

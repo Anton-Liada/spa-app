@@ -14,9 +14,7 @@ export const Filter: React.FC<IFilterProps> = ({
 }) => {
   return (
     <div className="filter home-page__filter">
-      <label className="filter__label">
-        Filter title by keywords
-      </label>
+      <label className="filter__label">Filter title by keywords</label>
 
       <input
         className="filter__input"

@@ -41,6 +41,7 @@ export class CompaniesService {
 
   async update(payload: CreateCompanyDto) {
     const company = await this.getCompanyById(payload.id);
+
     if (!company) {
       throw new HttpException('Company does not exist', HttpStatus.BAD_REQUEST);
     }

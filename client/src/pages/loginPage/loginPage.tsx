@@ -5,10 +5,10 @@ import { AuthComponent } from '../../componets/authComponent';
 import { useAppDispatch, useAppSelector } from '../../features/hooks/hooks';
 import { fetchLogin } from '../../features/slices/authSlice';
 import { ILogin } from '../../types/types';
+import './loginPage.scss';
+import { Notification } from '/src/componets/notification';
 import { InputErrors } from '/src/types/enums';
 import { regexpEmail } from '/src/utils/regexp';
-import { Notification } from '/src/componets/notification';
-import './loginPage.scss';
 
 export const LoginPage: React.FC = () => {
   const dispatch = useAppDispatch();

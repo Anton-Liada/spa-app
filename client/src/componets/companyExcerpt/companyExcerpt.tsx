@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
-import { ICompany } from '../../types/types';
 import '../../styles/main.scss';
+import { ICompany } from '../../types/types';
 
 interface IProps {
   company: ICompany;

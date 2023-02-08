@@ -31,7 +31,7 @@ const usersSlice = createSlice({
           state.users = action.payload.map(user => user);
         },
       )
-      .addCase(fetchUsers.rejected, (state) => {
+      .addCase(fetchUsers.rejected, state => {
         setError(state, EMessages.ERROR);
       });
   },
