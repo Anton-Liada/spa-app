@@ -1,4 +1,4 @@
-import { Status } from './enums';
+import { EMessages, Status } from './enums';
 
 export interface IUser {
   id: number;
@@ -32,19 +32,19 @@ export interface ICompaniesState {
   companies: ICompany[];
   selectedCompany: ICompany | null;
   status: Status;
-  error: null | string;
+  error: EMessages | null;
 }
 
 export interface IAuthState {
   email: string;
   status: Status;
-  error: null | string;
+  error: EMessages | null;
 }
 
 export interface IUsersState {
   users: IUser[];
   status: Status;
-  error: null | string;
+  error: EMessages | null;
 }
 
 export interface IProfileState {
@@ -68,5 +68,5 @@ export interface ISetStatus {
 
 export interface ISetError {
   status: Status;
-  error: string | null;
+  error: EMessages | null;
 }

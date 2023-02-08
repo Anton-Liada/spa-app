@@ -1,9 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { CompaniesList } from '/src/componets/companiesList';
-import { useAppSelector } from '/src/features/hooks/hooks';
+import { Loader } from '/src/componets/loader';
+import { useAppDispatch, useAppSelector } from '/src/features/hooks/hooks';
+import { fetchCompanies } from '/src/features/slices/companiesSlice';
+import { Status } from '/src/types/enums';
 
 export const CompaniesPage: React.FC = () => {
   const companies = useAppSelector(state => state.companies.companies);
+  const fetchRequestStatus = useAppSelector(state => state.companies.status);
+  const dispatch = useAppDispatch();
 
-  return <CompaniesList companies={companies} title="Companies" />;
+  useEffect(() => {
+    dispatch(fetchCompanies());
+  }, [dispatch])
+
+  return (
+    <>
+      {fetchRequestStatus === Status.LOADING && <Loader />}
+
+      {fetchRequestStatus === Status.SUCCEEDED &&
+        <CompaniesList companies={companies} title="Companies" />
+      }
+    </>
+  )
 };

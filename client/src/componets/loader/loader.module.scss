@@ -8,11 +8,11 @@
 
   &Content {
     border-radius: 50%;
-    width: 2em;
-    height: 2em;
+    width: 5em;
+    height: 5em;
     margin: 1em auto;
-    border: 0.3em solid $color-grey;
-    border-left-color: $color-black;
+    border: 1em solid $color-blue-charm;
+    border-left-color: $color-purple;
     animation: load8 1.2s infinite linear;
   }
 }

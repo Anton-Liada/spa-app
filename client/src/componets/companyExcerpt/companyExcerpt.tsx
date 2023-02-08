@@ -8,19 +8,22 @@ interface IProps {
 }
 
 let CompanyExcerpt: React.FC<IProps> = ({ company }) => {
-  const { id, name, serviceOfActivity, author } = company;
+  const { id, name, serviceOfActivity, address } = company;
 
   return (
     <div className="card companies-section__card">
       <div className="card__header">
         <h4 className="card__title">{name}</h4>
-
-        <p className="card__author">
-          {`Created by ${author.last_name} ${author.first_name}`}
-        </p>
+        <p>{`Address: ${address}`}</p>
       </div>
 
-      <p className="card__description">{serviceOfActivity}</p>
+      <p className="card__description">
+        <strong>Service of ativity</strong>
+
+        <br />
+
+        {serviceOfActivity}
+      </p>
 
       <Link to={`/companies/${id}`} className="card__link">
         View company

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from '../../axios';
-import { Status } from '../../types/enums';
+import { EMessages, Status } from '../../types/enums';
 import { IAuthState, ILogin, IUser } from '../../types/types';
 import { setError } from '/src/utils/setError';
 import { setStatus } from '/src/utils/setStatus';
@@ -50,7 +50,9 @@ const authSlice = createSlice({
         state.status = Status.SUCCEEDED;
         state.email = action.payload;
       })
-      .addCase(fetchLogin.rejected, setError);
+      .addCase(fetchLogin.rejected, (state) => {
+        return setError(state, EMessages.LOGIN_ERROR_MSG)
+      });
 
     builder
       .addCase(fetchAuth.pending, setStatus)
@@ -58,7 +60,9 @@ const authSlice = createSlice({
         state.status = Status.SUCCEEDED;
         state.email = action.payload;
       })
-      .addCase(fetchAuth.rejected, setError);
+      .addCase(fetchAuth.rejected, (state) => {
+        return setError(state, EMessages.ERROR)
+      });
 
     builder
       .addCase(fetchRegister.pending, setStatus)
@@ -69,7 +73,9 @@ const authSlice = createSlice({
           state.email = action.payload;
         },
       )
-      .addCase(fetchRegister.rejected, setError);
+      .addCase(fetchRegister.rejected, (state) => {
+        return setError(state, EMessages.REGISTER_ERROR_MSG)
+      });
   },
 });
 

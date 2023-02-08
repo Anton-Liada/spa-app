@@ -6,8 +6,9 @@ import {
   deleteCompany,
   fetchOneCompany,
 } from '../../features/slices/companiesSlice';
-import './singleCompanyPage.scss';
 import { Notification } from '/src/componets/notification';
+import './singleCompanyPage.scss';
+import { EMessages } from '/src/types/enums';
 
 export const SingleCompanyPage: React.FC = () => {
   const [isShowNotification, setIsShowNotification] = useState(false);
@@ -49,7 +50,7 @@ export const SingleCompanyPage: React.FC = () => {
   return (
     <div className="update-page">
       <Notification
-        message="Your company has been successfully updated."
+        message={EMessages.UPDATED_COMPANY_MSG}
         isShowNotification={isShowNotification}
         setIsShowNotification={setIsShowNotification}
       />
@@ -67,7 +68,13 @@ export const SingleCompanyPage: React.FC = () => {
             {company?.name}
           </h3>
 
-          <p className="card__description">{company?.serviceOfActivity}</p>
+          <p className="card__description">
+            <span className="card__span">Service of ativity</span>
+
+            <br />
+
+            {company?.serviceOfActivity}
+          </p>
 
           <p>
             <span className="card__span">Address:</span>

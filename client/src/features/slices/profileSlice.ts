@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from '../../axios';
-import { Status } from '../../types/enums';
+import { EMessages, Status } from '../../types/enums';
 import { IProfileState, IUser } from '../../types/types';
 import { setError } from '/src/utils/setError';
 import { setStatus } from '/src/utils/setStatus';
@@ -43,7 +43,9 @@ const profileSlice = createSlice({
           state.profile = action.payload;
         },
       )
-      .addCase(fetchProfile.rejected, setError);
+      .addCase(fetchProfile.rejected, (state) => {
+        setError(state, EMessages.ERROR)
+      });
 
     builder
       .addCase(updateProfile.pending, setStatus)
@@ -56,7 +58,9 @@ const profileSlice = createSlice({
           }
         },
       )
-      .addCase(updateProfile.rejected, setError);
+      .addCase(updateProfile.rejected, (state) => {
+        setError(state, EMessages.ERROR)
+      });
   },
 });
 

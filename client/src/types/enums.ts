@@ -16,6 +16,11 @@ export enum InputErrors {
   REQUIRED = 'Please, enter a value',
 }
 
-export enum ErrorMessage {
-  ERROR = 'something went wrong',
+export enum EMessages {
+  ERROR = 'Something went wrong.',
+  LOGIN_ERROR_MSG = 'You have entered an invalid email or password.',
+  REGISTER_ERROR_MSG = 'User with such data already exist.',
+  UPDATED_COMPANY_MSG = "Your company has been successfully updated.",
+  CREATED_COMPANY_MSG = "Your company has been successfully created.",
+  ERROR_COMPANY_MSG = 'Company with such name already exist.',
 }

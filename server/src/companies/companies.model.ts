@@ -27,7 +27,7 @@ export class Company extends Model<Company, CompanyCreationAttrs> {
   })
   id: number;
 
-  @Column({ type: DataType.STRING, allowNull: false })
+  @Column({ type: DataType.STRING, unique: true, allowNull: false })
   name: string;
 
   @Column({ type: DataType.STRING, allowNull: false })

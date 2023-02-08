@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from '../../axios';
-import { Status } from '../../types/enums';
+import { EMessages, Status } from '../../types/enums';
 import { ICompaniesState, ICompany } from '../../types/types';
 import { setError } from '/src/utils/setError';
 import { setStatus } from '/src/utils/setStatus';
@@ -25,14 +25,10 @@ export const fetchCompanies = createAsyncThunk(
 export const createNewCompany = createAsyncThunk(
   'companies/createNewCompany',
   async (company: ICompany) => {
-    try {
-      const { data } = await axios.post('companies', company);
+    const { data } = await axios.post('companies', company);
 
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
-  },
+    return data;
+  }
 );
 
 export const updateCompany = createAsyncThunk(
@@ -76,7 +72,9 @@ const companiesSlice = createSlice({
           state.companies = action.payload.map(company => company);
         },
       )
-      .addCase(fetchCompanies.rejected, setError);
+      .addCase(fetchCompanies.rejected, (state) => {
+        return setError(state, EMessages.ERROR);
+      });
 
     builder
       .addCase(createNewCompany.pending, setStatus)
@@ -84,10 +82,13 @@ const companiesSlice = createSlice({
         createNewCompany.fulfilled,
         (state, action: PayloadAction<ICompany>) => {
           state.status = Status.SUCCEEDED;
+          state.error = null;
           state.companies.push({ ...action.payload });
         },
       )
-      .addCase(createNewCompany.rejected, setError);
+      .addCase(createNewCompany.rejected, (state) => {
+        return setError(state, EMessages.ERROR_COMPANY_MSG);
+      });
 
     builder
       .addCase(updateCompany.pending, setStatus)
@@ -108,7 +109,9 @@ const companiesSlice = createSlice({
           }
         },
       )
-      .addCase(updateCompany.rejected, setError);
+      .addCase(updateCompany.rejected, (state) => {
+        return setError(state, EMessages.ERROR_COMPANY_MSG)
+      });
 
     builder
       .addCase(
@@ -120,7 +123,9 @@ const companiesSlice = createSlice({
           );
         },
       )
-      .addCase(deleteCompany.rejected, setError);
+      .addCase(deleteCompany.rejected, (state) => {
+        return setError(state, EMessages.ERROR)
+      });
 
     builder
       .addCase(fetchOneCompany.pending, setStatus)
@@ -131,7 +136,9 @@ const companiesSlice = createSlice({
           state.selectedCompany = action.payload;
         },
       )
-      .addCase(fetchOneCompany.rejected, setError);
+      .addCase(fetchOneCompany.rejected, (state) => {
+        return setError(state, EMessages.ERROR)
+      });
   },
 });
 

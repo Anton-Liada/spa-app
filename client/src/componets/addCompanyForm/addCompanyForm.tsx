@@ -1,28 +1,26 @@
 import React, { useState } from 'react';
 import { FormComponent } from '../formComponent/formComponent';
 import { Notification } from '../notification';
+import { EMessages } from '/src/types/enums';
 import './addCompanyForm.scss';
 
 export const AddCompanyForm: React.FC = () => {
   const [isShowNotification, setIsShowNotification] = useState(false);
 
-  const handleShowNotification = () => {
-    setIsShowNotification(true);
-  };
-
   return (
     <>
       <Notification
-        message="Your company has been successfully created."
+        message={EMessages.CREATED_COMPANY_MSG}
         isShowNotification={isShowNotification}
         setIsShowNotification={setIsShowNotification}
       />
+
       <section className="add-section">
         <h2 className="title title--size add-section__title">
           Add a New Company
         </h2>
 
-        <FormComponent onClick={handleShowNotification} />
+        <FormComponent />
       </section>
     </>
   );

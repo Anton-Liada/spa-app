@@ -4,7 +4,6 @@ import { Header } from '../header';
 import { ProtectedRoutes } from '../protecedRoutes';
 import { useAppDispatch, useAppSelector } from '/src/features/hooks/hooks';
 import { fetchAuth, selectIsLogin } from '/src/features/slices/authSlice';
-import { fetchCompanies } from '/src/features/slices/companiesSlice';
 import { fetchProfile } from '/src/features/slices/profileSlice';
 import { CompaniesPage } from '/src/pages/companiesPage';
 import { HomePage } from '/src/pages/homePage';
@@ -21,7 +20,6 @@ export const App: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetchAuth());
-    dispatch(fetchCompanies());
     dispatch(fetchProfile());
   }, [isAuth, dispatch]);
 

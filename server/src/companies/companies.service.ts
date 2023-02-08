@@ -1,6 +1,5 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { UsersService } from 'src/users/users.service';
 import { Company } from './companies.model';
 import { CreateCompanyDto } from './dto/create-company.dto';
 import { HttpException } from '@nestjs/common';
@@ -9,7 +8,6 @@ import { HttpException } from '@nestjs/common';
 export class CompaniesService {
   constructor(
     @InjectModel(Company) private companyRepository: typeof Company,
-    private usersService: UsersService,
   ) {}
 
   async getAllCompanies() {
@@ -29,11 +27,16 @@ export class CompaniesService {
   }
 
   async create(payload: CreateCompanyDto) {
-    try {
-      return await this.companyRepository.create(payload);
-    } catch (error) {
-      throw new Error(error);
+    const existingCompany = await this.getCompanyByName(payload.name);
+
+    if (existingCompany) {
+      throw new HttpException(
+        `Company with ${existingCompany.name} already exists`,
+        HttpStatus.BAD_REQUEST,
+      );
     }
+
+    return await this.companyRepository.create(payload);
   }
 
   async update(payload: CreateCompanyDto) {
