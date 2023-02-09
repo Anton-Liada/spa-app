@@ -1,5 +1,4 @@
 # Create your own company!
-I use free hosting, please wait until the data is downloaded :)
 Web application with possibility of user authorization and management of own companies.
 
 ## Setup

@@ -33,7 +33,7 @@ export class AuthService {
 
     if (candidate) {
       throw new HttpException(
-        `User with ${candidate.email} already exists`,
+        `User with ${candidate.email} already exist`,
         HttpStatus.BAD_REQUEST,
       );
     }
