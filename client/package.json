@@ -12,7 +12,7 @@
     "checkformat": "prettier --check \"**/*.{js,jsx,ts,tsx,json}\"",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json}\"",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "start": "parcel index.html"
+    "start": "parcel public/index.html"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.8.0",
