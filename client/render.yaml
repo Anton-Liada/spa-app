@@ -1,6 +1,4 @@
-services:
-  - type: web
-    name: my-react-app
-    env: static
+staticSites:
+  - name: spa-app
     buildCommand: npm run build
-    staticPublishPath: dist
+    publishDir: dist
