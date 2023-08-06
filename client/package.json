@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "homepage": "https://Anton-Liada.github.io/spa-app/",
-  "source": "dist/index.html",
+  "source": "public/index.html",
   "scripts": {
     "predeploy": "rm -rf build & npm run build",
     "deploy": "gh-pages -d dist",
@@ -11,7 +11,8 @@
     "build": "parcel build public/index.html --public-url /spa-app/",
     "checkformat": "prettier --check \"**/*.{js,jsx,ts,tsx,json}\"",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json}\"",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "start": "parcel index.html",
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.8.0",
