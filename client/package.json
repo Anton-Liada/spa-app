@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "homepage": "https://Anton-Liada.github.io/spa-app/",
-  "source": "public/index.html",
+  "source": "dist/index.html",
   "scripts": {
-    "predeploy": "npm run build",
+    "predeploy": "rm -rf build & npm run build",
     "deploy": "gh-pages -d dist",
     "dev": "parcel -p 7001 --open",
     "build": "parcel build public/index.html --public-url /spa-app/",
