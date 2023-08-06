@@ -1,5 +1,5 @@
 # Create your own company!
-Project Platform using React.js and Nest.js **--Here is [DEMO LINK]([https://Anton-Liada.github.io/codebridge/](https://spa-app-2281.onrender.com/))**
+Project Platform using React.js and Nest.js **--Here is [DEMO LINK](https://spa-app-2281.onrender.com/)**
 
 At the core of this project is a modern technology stack, including React.js for the frontend, Nest.js for the backend, PostgreSQL as a database, and Redux Toolkit for state management.
 
