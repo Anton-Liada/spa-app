@@ -20,11 +20,11 @@ import { ProfileModule } from './profile/profile.module';
     }),
     SequelizeModule.forRoot({
       dialect: 'postgres',
-      host: process.env.POSTGRES_HOST,
-      port: Number(process.env.POSTGRES_PORT),
-      username: process.env.POSTGRES_USER,
-      password: process.env.POSTGRES_PASSWORD,
-      database: process.env.POSTGRES_DB,
+      host: 'dpg-cj7p1utjeehc739bfdj0-a.oregon-postgres.render.com',
+      port: 5432,
+      username: 'jikkentaky',
+      password: 'pq7SWe63nVLIoND4RhajJcA1SNN8J2Is',
+      database: 'nestjs_cfmg',
       ssl: true,
       dialectOptions: {
         ssl: {
