@@ -13646,14 +13646,15 @@ body {
   border-color: #764abc;
 }
 
-.loader {
+.spinner {
   justify-content: center;
   align-items: center;
   width: 100%;
+  height: 100vh;
   display: flex;
 }
 
-.loaderContent {
+.spinner__circle {
   border: 1em solid #848edb;
   border-left-color: #764abc;
   border-radius: 50%;
@@ -13692,6 +13693,7 @@ body {
   border: 1px solid #764abc;
   border-radius: 5px;
   width: 800px;
+  min-height: 235px;
   margin: 50px 0;
   display: flex;
   box-shadow: 0 4px 26px #00000040;

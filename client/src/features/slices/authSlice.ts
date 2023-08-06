@@ -2,8 +2,6 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from '../../axios';
 import { EMessages, Status } from '../../types/enums';
 import { IAuthState, ILogin, IUser } from '../../types/types';
-import { setError } from '/src/utils/setError';
-import { setStatus } from '/src/utils/setStatus';
 
 export const fetchLogin = createAsyncThunk(
   'auth/fetchLogin',
@@ -35,6 +33,20 @@ const initialState: IAuthState = {
   error: null,
 };
 
+const handlePending = (state: IAuthState) => {
+  state.status = Status.LOADING;
+};
+
+const handleFulfilled = (state: IAuthState, action: PayloadAction<string>) => {
+  state.status = Status.SUCCEEDED;
+  state.email = action.payload;
+};
+
+const handleRejected = (state: IAuthState, message: EMessages) => {
+  state.status = Status.FAILED;
+  state.error = message;
+};
+
 const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -45,41 +57,33 @@ const authSlice = createSlice({
   },
   extraReducers(builder) {
     builder
-      .addCase(fetchLogin.pending, setStatus)
-      .addCase(fetchLogin.fulfilled, (state, action: PayloadAction<string>) => {
-        state.status = Status.SUCCEEDED;
-        state.email = action.payload;
-      })
-      .addCase(fetchLogin.rejected, state => {
-        return setError(state, EMessages.LOGIN_ERROR_MSG);
-      });
-
-    builder
-      .addCase(fetchAuth.pending, setStatus)
-      .addCase(fetchAuth.fulfilled, (state, action: PayloadAction<string>) => {
-        state.status = Status.SUCCEEDED;
-        state.email = action.payload;
-      })
-      .addCase(fetchAuth.rejected, state => {
-        return setError(state, EMessages.ERROR);
-      });
-
-    builder
-      .addCase(fetchRegister.pending, setStatus)
-      .addCase(
-        fetchRegister.fulfilled,
-        (state, action: PayloadAction<string>) => {
-          state.status = Status.SUCCEEDED;
-          state.email = action.payload;
-        },
+      .addCase(fetchLogin.pending, handlePending)
+      .addCase(fetchLogin.fulfilled, (state, action) =>
+        handleFulfilled(state, action),
       )
-      .addCase(fetchRegister.rejected, state => {
-        return setError(state, EMessages.REGISTER_ERROR_MSG);
-      });
+      .addCase(fetchLogin.rejected, state =>
+        handleRejected(state, EMessages.LOGIN_ERROR_MSG),
+      )
+
+      .addCase(fetchAuth.pending, handlePending)
+      .addCase(fetchAuth.fulfilled, (state, action) =>
+        handleFulfilled(state, action),
+      )
+      .addCase(fetchAuth.rejected, state =>
+        handleRejected(state, EMessages.ERROR),
+      )
+
+      .addCase(fetchRegister.pending, handlePending)
+      .addCase(fetchRegister.fulfilled, (state, action) =>
+        handleFulfilled(state, action),
+      )
+      .addCase(fetchRegister.rejected, state =>
+        handleRejected(state, EMessages.REGISTER_ERROR_MSG),
+      );
   },
 });
 
-export const selectIsLogin = (state: { auth: { email: string } }) =>
+export const selectIsLogin = (state: { auth: IAuthState }) =>
   Boolean(state.auth.email);
 
 export default authSlice.reducer;

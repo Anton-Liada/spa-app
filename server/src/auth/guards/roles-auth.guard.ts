@@ -41,7 +41,6 @@ export class RolesAuthGuard implements CanActivate {
       req.user = user;
       return user.roles.some((role) => requiredRoles.includes(role.position));
     } catch (e) {
-      console.log(e);
       throw new HttpException('Нет доступа', HttpStatus.FORBIDDEN);
     }
   }

@@ -34873,19 +34873,20 @@ var _s = $RefreshSig$();
 const App = ()=>{
     _s();
     const dispatch = (0, _hooks.useAppDispatch)();
-    const isAuth = (0, _hooks.useAppSelector)((0, _authSlice.selectIsLogin));
+    const isLogin = (0, _hooks.useAppSelector)((0, _authSlice.selectIsLogin));
+    const isAuth = window.localStorage.getItem("access_token") || isLogin;
     (0, _react.useEffect)(()=>{
-        dispatch((0, _authSlice.fetchAuth)());
-        dispatch((0, _profileSlice.fetchProfile)());
+        if (isAuth) dispatch((0, _profileSlice.fetchProfile)());
     }, [
         isAuth,
-        dispatch
+        dispatch,
+        isLogin
     ]);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
         children: [
             isAuth && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _header.Header), {}, void 0, false, {
                 fileName: "src/componets/app/app.tsx",
-                lineNumber: 28,
+                lineNumber: 30,
                 columnNumber: 18
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Routes), {
@@ -34895,7 +34896,7 @@ const App = ()=>{
                         element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _loginPage.LoginPage), {}, void 0, false, void 0, void 0)
                     }, void 0, false, {
                         fileName: "src/componets/app/app.tsx",
-                        lineNumber: 31,
+                        lineNumber: 33,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -34903,7 +34904,7 @@ const App = ()=>{
                         element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _registerPage.RegisterPage), {}, void 0, false, void 0, void 0)
                     }, void 0, false, {
                         fileName: "src/componets/app/app.tsx",
-                        lineNumber: 32,
+                        lineNumber: 34,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -34911,7 +34912,7 @@ const App = ()=>{
                         element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _notFoundPage.NotFoundPage), {}, void 0, false, void 0, void 0)
                     }, void 0, false, {
                         fileName: "src/componets/app/app.tsx",
-                        lineNumber: 33,
+                        lineNumber: 35,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -34922,7 +34923,7 @@ const App = ()=>{
                                 element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _homePage.HomePage), {}, void 0, false, void 0, void 0)
                             }, void 0, false, {
                                 fileName: "src/componets/app/app.tsx",
-                                lineNumber: 36,
+                                lineNumber: 38,
                                 columnNumber: 11
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -34930,7 +34931,7 @@ const App = ()=>{
                                 element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _profilePage.ProfilePage), {}, void 0, false, void 0, void 0)
                             }, void 0, false, {
                                 fileName: "src/componets/app/app.tsx",
-                                lineNumber: 37,
+                                lineNumber: 39,
                                 columnNumber: 11
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -34938,13 +34939,13 @@ const App = ()=>{
                                 element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _settingsPage.SettingsPage), {}, void 0, false, void 0, void 0)
                             }, void 0, false, {
                                 fileName: "src/componets/app/app.tsx",
-                                lineNumber: 38,
+                                lineNumber: 40,
                                 columnNumber: 11
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/componets/app/app.tsx",
-                        lineNumber: 35,
+                        lineNumber: 37,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -34957,7 +34958,7 @@ const App = ()=>{
                                     element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _companiesPage.CompaniesPage), {}, void 0, false, void 0, void 0)
                                 }, void 0, false, {
                                     fileName: "src/componets/app/app.tsx",
-                                    lineNumber: 43,
+                                    lineNumber: 45,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -34965,30 +34966,30 @@ const App = ()=>{
                                     element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _singleCompanyPage.SingleCompanyPage), {}, void 0, false, void 0, void 0)
                                 }, void 0, false, {
                                     fileName: "src/componets/app/app.tsx",
-                                    lineNumber: 44,
+                                    lineNumber: 46,
                                     columnNumber: 13
                                 }, undefined)
                             ]
                         }, void 0, true, {
                             fileName: "src/componets/app/app.tsx",
-                            lineNumber: 42,
+                            lineNumber: 44,
                             columnNumber: 11
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/componets/app/app.tsx",
-                        lineNumber: 41,
+                        lineNumber: 43,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/componets/app/app.tsx",
-                lineNumber: 30,
+                lineNumber: 32,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true);
 };
-_s(App, "DGKrKFLAFqqeDWEcfSvohhSajOM=", false, function() {
+_s(App, "xXI7c9JmqTqxAsZudUztvdW/BHQ=", false, function() {
     return [
         (0, _hooks.useAppDispatch),
         (0, _hooks.useAppSelector)
@@ -35003,7 +35004,7 @@ $RefreshReg$(_c, "App");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"9xmpe","../header":"4Sabr","../protecedRoutes":"49Bf7","/src/features/hooks/hooks":"iWNaX","/src/features/slices/authSlice":"9wjbg","/src/features/slices/profileSlice":"cWZWJ","/src/pages/companiesPage":"5zaWY","/src/pages/homePage":"aAh9i","/src/pages/loginPage":"d60vw","/src/pages/notFoundPage":"f4Xuh","/src/pages/profilePage":"7AMNw","/src/pages/registerPage":"5Ah0D","/src/pages/settingsPage":"27Sen","/src/pages/singleCompanyPage":"d4vw3","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"4Sabr":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"9xmpe","../header":"4Sabr","../protecedRoutes":"49Bf7","/src/features/hooks/hooks":"iWNaX","/src/features/slices/profileSlice":"cWZWJ","/src/pages/companiesPage":"5zaWY","/src/pages/homePage":"aAh9i","/src/pages/loginPage":"d60vw","/src/pages/notFoundPage":"f4Xuh","/src/pages/profilePage":"7AMNw","/src/pages/registerPage":"5Ah0D","/src/pages/settingsPage":"27Sen","/src/pages/singleCompanyPage":"d4vw3","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","/src/features/slices/authSlice":"9wjbg"}],"4Sabr":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _header = require("./header");
@@ -35030,97 +35031,110 @@ var _s = $RefreshSig$();
 const Header = ()=>{
     _s();
     const dispatch = (0, _hooks.useAppDispatch)();
+    const isLogin = (0, _hooks.useAppSelector)((0, _authSlice.selectIsLogin));
+    const isAccessTokenExist = Boolean(window.localStorage.getItem("access_token"));
+    const [isAuth, setIsAuth] = (0, _react.useState)(isAccessTokenExist || isLogin);
+    (0, _react.useEffect)(()=>{
+        setIsAuth(isAccessTokenExist || isLogin);
+    }, [
+        isLogin,
+        isAccessTokenExist
+    ]);
     const onClickLogout = ()=>{
         dispatch((0, _authSlice.logout)());
+        setIsAuth(false);
         window.localStorage.removeItem("access_token");
     };
-    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("header", {
-        className: "header",
-        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("nav", {
-            className: "nav",
-            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                children: [
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
-                        className: "nav__title",
-                        children: "Create your own company"
-                    }, void 0, false, {
-                        fileName: "src/componets/header/header.tsx",
-                        lineNumber: 19,
-                        columnNumber: 11
-                    }, undefined),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                        className: "nav__content",
-                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                            className: "nav__list",
-                            children: [
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _headerLink.HeaderLink), {
-                                    content: "Home",
-                                    to: "/",
-                                    style: "nav__link"
-                                }, void 0, false, {
-                                    fileName: "src/componets/header/header.tsx",
-                                    lineNumber: 23,
-                                    columnNumber: 15
-                                }, undefined),
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _headerLink.HeaderLink), {
-                                    content: "Companies",
-                                    to: "/companies",
-                                    style: "nav__link"
-                                }, void 0, false, {
-                                    fileName: "src/componets/header/header.tsx",
-                                    lineNumber: 25,
-                                    columnNumber: 15
-                                }, undefined),
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _headerLink.HeaderLink), {
-                                    content: "Profile",
-                                    to: "/profile",
-                                    style: "nav__link"
-                                }, void 0, false, {
-                                    fileName: "src/componets/header/header.tsx",
-                                    lineNumber: 31,
-                                    columnNumber: 15
-                                }, undefined),
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _headerLink.HeaderLink), {
-                                    content: "Logout",
-                                    to: "/login",
-                                    style: "nav__link",
-                                    onClick: onClickLogout
-                                }, void 0, false, {
-                                    fileName: "src/componets/header/header.tsx",
-                                    lineNumber: 33,
-                                    columnNumber: 15
-                                }, undefined)
-                            ]
-                        }, void 0, true, {
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
+        children: isAuth && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("header", {
+            className: "header",
+            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("nav", {
+                className: "nav",
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                    children: [
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
+                            className: "nav__title",
+                            children: "Create your own company"
+                        }, void 0, false, {
                             fileName: "src/componets/header/header.tsx",
-                            lineNumber: 22,
-                            columnNumber: 13
+                            lineNumber: 31,
+                            columnNumber: 15
+                        }, undefined),
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                            className: "nav__content",
+                            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "nav__list",
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _headerLink.HeaderLink), {
+                                        content: "Home",
+                                        to: "/",
+                                        style: "nav__link"
+                                    }, void 0, false, {
+                                        fileName: "src/componets/header/header.tsx",
+                                        lineNumber: 35,
+                                        columnNumber: 19
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _headerLink.HeaderLink), {
+                                        content: "Companies",
+                                        to: "/companies",
+                                        style: "nav__link"
+                                    }, void 0, false, {
+                                        fileName: "src/componets/header/header.tsx",
+                                        lineNumber: 37,
+                                        columnNumber: 19
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _headerLink.HeaderLink), {
+                                        content: "Profile",
+                                        to: "/profile",
+                                        style: "nav__link"
+                                    }, void 0, false, {
+                                        fileName: "src/componets/header/header.tsx",
+                                        lineNumber: 43,
+                                        columnNumber: 19
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _headerLink.HeaderLink), {
+                                        content: "Logout",
+                                        to: "/login",
+                                        style: "nav__link",
+                                        onClick: onClickLogout
+                                    }, void 0, false, {
+                                        fileName: "src/componets/header/header.tsx",
+                                        lineNumber: 49,
+                                        columnNumber: 19
+                                    }, undefined)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/componets/header/header.tsx",
+                                lineNumber: 34,
+                                columnNumber: 17
+                            }, undefined)
+                        }, void 0, false, {
+                            fileName: "src/componets/header/header.tsx",
+                            lineNumber: 33,
+                            columnNumber: 15
                         }, undefined)
-                    }, void 0, false, {
-                        fileName: "src/componets/header/header.tsx",
-                        lineNumber: 21,
-                        columnNumber: 11
-                    }, undefined)
-                ]
-            }, void 0, true, {
+                    ]
+                }, void 0, true, {
+                    fileName: "src/componets/header/header.tsx",
+                    lineNumber: 30,
+                    columnNumber: 13
+                }, undefined)
+            }, void 0, false, {
                 fileName: "src/componets/header/header.tsx",
-                lineNumber: 18,
-                columnNumber: 9
+                lineNumber: 29,
+                columnNumber: 11
             }, undefined)
         }, void 0, false, {
             fileName: "src/componets/header/header.tsx",
-            lineNumber: 17,
-            columnNumber: 7
+            lineNumber: 28,
+            columnNumber: 9
         }, undefined)
-    }, void 0, false, {
-        fileName: "src/componets/header/header.tsx",
-        lineNumber: 16,
-        columnNumber: 5
-    }, undefined);
+    }, void 0, false);
 };
-_s(Header, "BJQ1DUn/XFEl2NsQ3DWyHAXfnkY=", false, function() {
+_s(Header, "FKLdCPtnAgEzgIaT8B5tAdp/U4c=", false, function() {
     return [
-        (0, _hooks.useAppDispatch)
+        (0, _hooks.useAppDispatch),
+        (0, _hooks.useAppSelector)
     ];
 });
 _c = Header;
@@ -35153,8 +35167,6 @@ var _toolkit = require("@reduxjs/toolkit");
 var _axios = require("../../axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _enums = require("../../types/enums");
-var _setError = require("/src/utils/setError");
-var _setStatus = require("/src/utils/setStatus");
 const fetchLogin = (0, _toolkit.createAsyncThunk)("auth/fetchLogin", async (params)=>{
     const { data } = await (0, _axiosDefault.default).post("auth/signin", params);
     return data;
@@ -35172,6 +35184,17 @@ const initialState = {
     status: (0, _enums.Status).IDLE,
     error: null
 };
+const handlePending = (state)=>{
+    state.status = (0, _enums.Status).LOADING;
+};
+const handleFulfilled = (state, action)=>{
+    state.status = (0, _enums.Status).SUCCEEDED;
+    state.email = action.payload;
+};
+const handleRejected = (state, message)=>{
+    state.status = (0, _enums.Status).FAILED;
+    state.error = message;
+};
 const authSlice = (0, _toolkit.createSlice)({
     name: "auth",
     initialState,
@@ -35181,31 +35204,14 @@ const authSlice = (0, _toolkit.createSlice)({
         }
     },
     extraReducers (builder) {
-        builder.addCase(fetchLogin.pending, (0, _setStatus.setStatus)).addCase(fetchLogin.fulfilled, (state, action)=>{
-            state.status = (0, _enums.Status).SUCCEEDED;
-            state.email = action.payload;
-        }).addCase(fetchLogin.rejected, (state)=>{
-            return (0, _setError.setError)(state, (0, _enums.EMessages).LOGIN_ERROR_MSG);
-        });
-        builder.addCase(fetchAuth.pending, (0, _setStatus.setStatus)).addCase(fetchAuth.fulfilled, (state, action)=>{
-            state.status = (0, _enums.Status).SUCCEEDED;
-            state.email = action.payload;
-        }).addCase(fetchAuth.rejected, (state)=>{
-            return (0, _setError.setError)(state, (0, _enums.EMessages).ERROR);
-        });
-        builder.addCase(fetchRegister.pending, (0, _setStatus.setStatus)).addCase(fetchRegister.fulfilled, (state, action)=>{
-            state.status = (0, _enums.Status).SUCCEEDED;
-            state.email = action.payload;
-        }).addCase(fetchRegister.rejected, (state)=>{
-            return (0, _setError.setError)(state, (0, _enums.EMessages).REGISTER_ERROR_MSG);
-        });
+        builder.addCase(fetchLogin.pending, handlePending).addCase(fetchLogin.fulfilled, (state, action)=>handleFulfilled(state, action)).addCase(fetchLogin.rejected, (state)=>handleRejected(state, (0, _enums.EMessages).LOGIN_ERROR_MSG)).addCase(fetchAuth.pending, handlePending).addCase(fetchAuth.fulfilled, (state, action)=>handleFulfilled(state, action)).addCase(fetchAuth.rejected, (state)=>handleRejected(state, (0, _enums.EMessages).ERROR)).addCase(fetchRegister.pending, handlePending).addCase(fetchRegister.fulfilled, (state, action)=>handleFulfilled(state, action)).addCase(fetchRegister.rejected, (state)=>handleRejected(state, (0, _enums.EMessages).REGISTER_ERROR_MSG));
     }
 });
 const selectIsLogin = (state)=>Boolean(state.auth.email);
 exports.default = authSlice.reducer;
 const { logout } = authSlice.actions;
 
-},{"@reduxjs/toolkit":"lL1Ef","../../axios":"1xqtm","../../types/enums":"6YALu","/src/utils/setError":"6t428","/src/utils/setStatus":"4KyPh","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lL1Ef":[function(require,module,exports) {
+},{"@reduxjs/toolkit":"lL1Ef","../../axios":"1xqtm","../../types/enums":"6YALu","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lL1Ef":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "EnhancerArray", ()=>EnhancerArray);
@@ -43258,26 +43264,7 @@ var EMessages;
     EMessages["ERROR_COMPANY_MSG"] = "Company with such name already exist.";
 })(EMessages || (EMessages = {}));
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6t428":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "setError", ()=>setError);
-var _enums = require("../types/enums");
-const setError = (state, errorMassege)=>{
-    state.status = (0, _enums.Status).FAILED;
-    state.error = errorMassege;
-};
-
-},{"../types/enums":"6YALu","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4KyPh":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "setStatus", ()=>setStatus);
-var _enums = require("../types/enums");
-const setStatus = (state)=>{
-    state.status = (0, _enums.Status).LOADING;
-};
-
-},{"../types/enums":"6YALu","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fp29S":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fp29S":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _headerLink = require("./headerLink");
@@ -43476,24 +43463,29 @@ var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _reactRouterDom = require("react-router-dom");
-var _hooks = require("../../features/hooks/hooks");
-var _authSlice = require("../../features/slices/authSlice");
+var _hooks = require("/src/features/hooks/hooks");
+var _authSlice = require("/src/features/slices/authSlice");
 var _loginPage = require("/src/pages/loginPage");
 var _s = $RefreshSig$();
 const ProtectedRoutes = ()=>{
     _s();
-    const isAuth = (0, _hooks.useAppSelector)((0, _authSlice.selectIsLogin));
+    const isLogin = (0, _hooks.useAppSelector)((0, _authSlice.selectIsLogin));
+    const isAuth = window.localStorage.getItem("access_token") || isLogin;
+    (0, _react.useEffect)(()=>{}, [
+        isAuth,
+        isLogin
+    ]);
     return isAuth ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Outlet), {}, void 0, false, {
         fileName: "src/componets/protecedRoutes/protectedRoutes.tsx",
-        lineNumber: 10,
+        lineNumber: 12,
         columnNumber: 19
     }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _loginPage.LoginPage), {}, void 0, false, {
         fileName: "src/componets/protecedRoutes/protectedRoutes.tsx",
-        lineNumber: 10,
+        lineNumber: 12,
         columnNumber: 32
     }, undefined);
 };
-_s(ProtectedRoutes, "x7tOE73qIoREEEk/629DkGBKxvg=", false, function() {
+_s(ProtectedRoutes, "Dq8FFg6NeX3TIkZRzvrwJ4Bt1uY=", false, function() {
     return [
         (0, _hooks.useAppSelector)
     ];
@@ -43507,7 +43499,7 @@ $RefreshReg$(_c, "ProtectedRoutes");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"9xmpe","../../features/hooks/hooks":"iWNaX","../../features/slices/authSlice":"9wjbg","/src/pages/loginPage":"d60vw","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"d60vw":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"9xmpe","/src/pages/loginPage":"d60vw","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","/src/features/hooks/hooks":"iWNaX","/src/features/slices/authSlice":"9wjbg"}],"d60vw":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _loginPage = require("./loginPage");
@@ -46040,7 +46032,26 @@ const profileSlice = (0, _toolkit.createSlice)({
 });
 exports.default = profileSlice.reducer;
 
-},{"@reduxjs/toolkit":"lL1Ef","../../axios":"1xqtm","../../types/enums":"6YALu","/src/utils/setError":"6t428","/src/utils/setStatus":"4KyPh","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5zaWY":[function(require,module,exports) {
+},{"@reduxjs/toolkit":"lL1Ef","../../axios":"1xqtm","../../types/enums":"6YALu","/src/utils/setError":"6t428","/src/utils/setStatus":"4KyPh","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6t428":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "setError", ()=>setError);
+var _enums = require("../types/enums");
+const setError = (state, errorMassege)=>{
+    state.status = (0, _enums.Status).FAILED;
+    state.error = errorMassege;
+};
+
+},{"../types/enums":"6YALu","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4KyPh":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "setStatus", ()=>setStatus);
+var _enums = require("../types/enums");
+const setStatus = (state)=>{
+    state.status = (0, _enums.Status).LOADING;
+};
+
+},{"../types/enums":"6YALu","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5zaWY":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _companiesPage = require("./companiesPage");
@@ -46109,7 +46120,7 @@ $RefreshReg$(_c, "CompaniesPage");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","/src/componets/companiesList":"cf5AS","/src/componets/loader":"fHYYd","/src/features/hooks/hooks":"iWNaX","/src/features/slices/companiesSlice":"fNN5l","/src/types/enums":"6YALu","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"cf5AS":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","/src/componets/companiesList":"cf5AS","/src/features/hooks/hooks":"iWNaX","/src/features/slices/companiesSlice":"fNN5l","/src/types/enums":"6YALu","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","/src/componets/loader":"fHYYd"}],"cf5AS":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _companiesList = require("./companiesList");
@@ -46977,50 +46988,7 @@ const filteredText = (text, values)=>{
     return text.toLowerCase().includes(values.toLowerCase());
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fHYYd":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _loader = require("./loader");
-parcelHelpers.exportAll(_loader, exports);
-
-},{"./loader":"byT5x","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"byT5x":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$9281 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$9281.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Loader", ()=>Loader);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _loaderScss = require("./loader.scss");
-const Loader = ()=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        className: "loader",
-        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-            className: "loaderContent"
-        }, void 0, false, {
-            fileName: "src/componets/loader/loader.tsx",
-            lineNumber: 6,
-            columnNumber: 5
-        }, undefined)
-    }, void 0, false, {
-        fileName: "src/componets/loader/loader.tsx",
-        lineNumber: 5,
-        columnNumber: 3
-    }, undefined);
-_c = Loader;
-var _c;
-$RefreshReg$(_c, "Loader");
-
-  $parcel$ReactRefreshHelpers$9281.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./loader.scss":"cW7th","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"cW7th":[function() {},{}],"fNN5l":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fNN5l":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "fetchCompanies", ()=>fetchCompanies);
@@ -47115,7 +47083,50 @@ const updatedCompany = (company, payload)=>{
     return Object.assign(company, payload);
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aAh9i":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fHYYd":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _loader = require("./loader");
+parcelHelpers.exportAll(_loader, exports);
+
+},{"./loader":"byT5x","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"byT5x":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$9281 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$9281.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Loader", ()=>Loader);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _loaderScss = require("./loader.scss");
+const Loader = ()=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        className: "spinner",
+        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+            className: "spinner__circle"
+        }, void 0, false, {
+            fileName: "src/componets/loader/loader.tsx",
+            lineNumber: 6,
+            columnNumber: 5
+        }, undefined)
+    }, void 0, false, {
+        fileName: "src/componets/loader/loader.tsx",
+        lineNumber: 5,
+        columnNumber: 3
+    }, undefined);
+_c = Loader;
+var _c;
+$RefreshReg$(_c, "Loader");
+
+  $parcel$ReactRefreshHelpers$9281.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./loader.scss":"cW7th","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"cW7th":[function() {},{}],"aAh9i":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _homePage = require("./homePage");
@@ -47640,8 +47651,9 @@ const ProfilePage = ()=>{
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                             className: "profile-block__img-wrapper",
                             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
+                                loading: "lazy",
                                 src: "https://api.realworld.io/images/smiley-cyrus.jpeg",
-                                alt: "",
+                                alt: "user_image",
                                 className: "profile-img"
                             }, void 0, false, {
                                 fileName: "src/pages/profilePage/profilePage.tsx",
@@ -47663,7 +47675,7 @@ const ProfilePage = ()=>{
                                         children: profile?.nick_name
                                     }, void 0, false, {
                                         fileName: "src/pages/profilePage/profilePage.tsx",
-                                        lineNumber: 29,
+                                        lineNumber: 30,
                                         columnNumber: 15
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
@@ -47671,7 +47683,7 @@ const ProfilePage = ()=>{
                                         children: `First name: ${profile?.first_name}`
                                     }, void 0, false, {
                                         fileName: "src/pages/profilePage/profilePage.tsx",
-                                        lineNumber: 31,
+                                        lineNumber: 32,
                                         columnNumber: 15
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
@@ -47679,7 +47691,7 @@ const ProfilePage = ()=>{
                                         children: `Last name: ${profile?.last_name}`
                                     }, void 0, false, {
                                         fileName: "src/pages/profilePage/profilePage.tsx",
-                                        lineNumber: 35,
+                                        lineNumber: 36,
                                         columnNumber: 15
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
@@ -47687,7 +47699,7 @@ const ProfilePage = ()=>{
                                         children: `Email: ${profile?.email}`
                                     }, void 0, false, {
                                         fileName: "src/pages/profilePage/profilePage.tsx",
-                                        lineNumber: 39,
+                                        lineNumber: 40,
                                         columnNumber: 15
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
@@ -47695,7 +47707,7 @@ const ProfilePage = ()=>{
                                         children: `Phone number: ${profile?.phone_number}`
                                     }, void 0, false, {
                                         fileName: "src/pages/profilePage/profilePage.tsx",
-                                        lineNumber: 41,
+                                        lineNumber: 42,
                                         columnNumber: 15
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
@@ -47703,7 +47715,7 @@ const ProfilePage = ()=>{
                                         children: `Role: ${profile?.roles?.map((role)=>role.position)}`
                                     }, void 0, false, {
                                         fileName: "src/pages/profilePage/profilePage.tsx",
-                                        lineNumber: 45,
+                                        lineNumber: 46,
                                         columnNumber: 15
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
@@ -47714,23 +47726,23 @@ const ProfilePage = ()=>{
                                             children: "Edit profile settings"
                                         }, void 0, false, {
                                             fileName: "src/pages/profilePage/profilePage.tsx",
-                                            lineNumber: 50,
+                                            lineNumber: 51,
                                             columnNumber: 17
                                         }, undefined)
                                     }, void 0, false, {
                                         fileName: "src/pages/profilePage/profilePage.tsx",
-                                        lineNumber: 49,
+                                        lineNumber: 50,
                                         columnNumber: 15
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/profilePage/profilePage.tsx",
-                                lineNumber: 28,
+                                lineNumber: 29,
                                 columnNumber: 13
                             }, undefined)
                         }, void 0, false, {
                             fileName: "src/pages/profilePage/profilePage.tsx",
-                            lineNumber: 27,
+                            lineNumber: 28,
                             columnNumber: 11
                         }, undefined)
                     ]
@@ -47749,7 +47761,7 @@ const ProfilePage = ()=>{
                 title: "My companies"
             }, void 0, false, {
                 fileName: "src/pages/profilePage/profilePage.tsx",
-                lineNumber: 59,
+                lineNumber: 60,
                 columnNumber: 7
             }, undefined)
         ]

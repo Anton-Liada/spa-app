@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import { Header } from '../header';
 import { ProtectedRoutes } from '../protecedRoutes';
 import { useAppDispatch, useAppSelector } from '/src/features/hooks/hooks';
-import { fetchAuth, selectIsLogin } from '/src/features/slices/authSlice';
+import { selectIsLogin } from '/src/features/slices/authSlice';
 import { fetchProfile } from '/src/features/slices/profileSlice';
 import { CompaniesPage } from '/src/pages/companiesPage';
 import { HomePage } from '/src/pages/homePage';
@@ -16,12 +16,14 @@ import { SingleCompanyPage } from '/src/pages/singleCompanyPage';
 
 export const App: React.FC = () => {
   const dispatch = useAppDispatch();
-  const isAuth = useAppSelector(selectIsLogin);
+  const isLogin = useAppSelector(selectIsLogin);
+  const isAuth = window.localStorage.getItem('access_token') || isLogin;
 
   useEffect(() => {
-    dispatch(fetchAuth());
-    dispatch(fetchProfile());
-  }, [isAuth, dispatch]);
+    if (isAuth) {
+      dispatch(fetchProfile());
+    }
+  }, [isAuth, dispatch, isLogin]);
 
   return (
     <>

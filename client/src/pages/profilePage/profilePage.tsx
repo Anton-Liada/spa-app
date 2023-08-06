@@ -18,8 +18,9 @@ export const ProfilePage: React.FC = () => {
         <div className="profile-block">
           <div className="profile-block__img-wrapper">
             <img
+              loading="lazy"
               src="https://api.realworld.io/images/smiley-cyrus.jpeg"
-              alt=""
+              alt="user_image"
               className="profile-img"
             />
           </div>
