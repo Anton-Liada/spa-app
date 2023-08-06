@@ -1,5 +1,17 @@
 # Create your own company!
-Web application with possibility of user authorization and management of own companies.
+Project Platform using React.js and Nest.js
+
+At the core of this project is a modern technology stack, including React.js for the frontend, Nest.js for the backend, PostgreSQL as a database, and Redux Toolkit for state management.
+
+Key Functional Features:
+
+User Authentication and Authorization: Users can register, log in.
+
+Role System: Users can have different roles, allowing for restricted or extended access to various functionalities of the application.
+
+Profile Management: Users can edit their personal details, and manage their profile settings.
+
+Company Management: Users can create, edit, and view company profiles. Additionally, there's a feature allowing them to view companies created by other users.
 
 ## Setup
 
