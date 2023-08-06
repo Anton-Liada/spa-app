@@ -13,7 +13,7 @@ export class RolesController {
 
   @Get()
   async getAll() {
-    return await this.roleService.getAllUsers();
+    return await this.roleService.getAllRoles();
   }
 
   @Post()

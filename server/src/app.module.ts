@@ -16,7 +16,7 @@ import { ProfileModule } from './profile/profile.module';
   providers: [],
   imports: [
     ConfigModule.forRoot({
-      envFilePath: `.${process.env.NODE_ENV}.env`,
+      envFilePath: '.env',
     }),
     SequelizeModule.forRoot({
       dialect: 'postgres',
@@ -25,6 +25,13 @@ import { ProfileModule } from './profile/profile.module';
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
+      ssl: true,
+      dialectOptions: {
+        ssl: {
+          require: true,
+          rejectUnauthorized: false,
+        },
+      },
       models: [User, Role, UserRoles, Company],
       autoLoadModels: true,
       synchronize: true,

@@ -9,7 +9,7 @@ import { HttpStatus } from '@nestjs/common/enums';
 export class RolesService {
   constructor(@InjectModel(Role) private roleRepository: typeof Role) {}
 
-  async getAllUsers() {
+  async getAllRoles() {
     return await this.roleRepository.findAll({ include: { all: true } });
   }
 
