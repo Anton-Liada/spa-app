@@ -1,0 +1,19 @@
+@import '../../styles/main.scss';
+
+.auth {
+  &__title {
+    margin-bottom: 22px;
+  }
+  
+  &__description {
+    margin-bottom: 55px;
+    line-height: 25px;
+  }
+  
+  &__link {
+    margin-left: 10px;
+    font-weight: $fw-600;
+    color: $color-blue;
+    @include hover(color, $color-purple);
+  }
+}

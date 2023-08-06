@@ -1,0 +1,22 @@
+@import '../utils';
+
+body {
+  font-family: $ff-montserrat;
+}
+
+.container {
+  max-width: 1400px;
+  padding-left: 75px;
+  padding-right: 75px;
+
+  &-small {
+    max-width: 850px;
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+
+  &, &-small {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
